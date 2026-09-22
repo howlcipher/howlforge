@@ -1,0 +1,21 @@
+# Build output
+/build/
+/dist/
+howlforge
+*.exe
+
+# Test and coverage artifacts
+coverage.out
+coverage.html
+*.test
+
+# Local operator state. The availability file is written by HowlPlane and is
+# machine specific, so it never belongs in version control.
+availability.json
+!examples/state/availability.json
+
+# Editor and OS noise
+.DS_Store
+*.swp
+.idea/
+.vscode/
