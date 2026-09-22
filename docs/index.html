@@ -1,24 +1,603 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>HowlForge</title>
-<script>
-(async () => {
-  const url = 'https://raw.githubusercontent.com/howlcipher/howlforge/ced2cf6110985c19ab543a640df0f0f54507c3ff/docs/index.html';
-  const html = await fetch(url).then(r => {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.text();
-  });
-  document.open();
-  document.write(html);
-  document.close();
-})().catch(err => {
-  document.body.textContent = 'Failed to load HowlForge page: ' + err;
-});
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="HowlForge is the AI workforce definition and runtime selection layer for HowlFutureWorks: durable roles, replaceable runtimes, deterministic matching, and inspectable handoffs.">
+    <link rel="canonical" href="https://howlcipher.github.io/howlforge/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="HowlForge">
+    <meta property="og:title" content="HowlForge | AI Workforce Definition &amp; Runtime Selection">
+    <meta property="og:description" content="Roles are durable. Models are replaceable. Sessions are disposable. HowlForge selects and explains eligible workers — it never launches them.">
+    <meta property="og:url" content="https://howlcipher.github.io/howlforge/">
+    <meta property="og:image" content="https://howlcipher.github.io/howl/social-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="HowlForge workforce roles and runtime matching">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HowlForge | AI Workforce Definition &amp; Runtime Selection">
+    <meta name="twitter:description" content="Roles are durable. Models are replaceable. Sessions are disposable.">
+    <meta name="twitter:image" content="https://howlcipher.github.io/howl/social-preview.png">
+    <meta name="twitter:image:alt" content="HowlForge workforce roles and runtime matching">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "HowlForge",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "POSIX, Linux, macOS",
+      "description": "AI workforce definition and runtime selection layer for HowlFutureWorks. Durable roles, replaceable runtimes, deterministic matching, and inspectable handoff contracts.",
+      "url": "https://howlcipher.github.io/howlforge/",
+      "author": {
+        "@type": "Person",
+        "name": "William Elias",
+        "url": "https://howlcipher.github.io/william_elias/"
+      },
+      "isPartOf": {
+        "@type": "SoftwareApplication",
+        "name": "Howl Autonomous Software Engineering Ecosystem",
+        "url": "https://howlcipher.github.io/howl/"
+      }
+    }
+    </script>
+
+    <title>HowlForge | AI Workforce Definition &amp; Runtime Selection</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
-<p>Loading HowlForge…</p>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div id="eco-drawer-overlay" class="eco-drawer-overlay" aria-hidden="true"></div>
+
+    <aside id="eco-drawer" class="eco-drawer" aria-label="Howl Ecosystem Directory" aria-hidden="true">
+        <div class="drawer-header">
+            <div class="drawer-title">HOWL // ECOSYSTEM DIRECTORY</div>
+            <button id="eco-drawer-close" class="btn-drawer-close" type="button" aria-label="Close ecosystem directory">[✕ CLOSE]</button>
+        </div>
+        <div class="drawer-body">
+            <a href="https://howlcipher.github.io/howl/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWL // HUB</span>
+                    <span class="node-card-role">[PORTAL]</span>
+                </div>
+                <div class="node-card-desc">Central ecosystem portal, architectural blueprint, and cross-project governance map.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/HowlFutureWorks/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLFUTUREWORKS</span>
+                    <span class="node-card-role" style="color: var(--color-blue);">[ORGANIZATION OS]</span>
+                </div>
+                <div class="node-card-desc">Version-controlled autonomous software organization: workforce, policy, institutional memory, governance and operating state.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlInstinct/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLINSTINCT</span>
+                    <span class="node-card-role" style="color: var(--color-amber);">[DECISION LAYER]</span>
+                </div>
+                <div class="node-card-desc">Bounded semantic judgments with explicit uncertainty and provenance. Confidence is not permission.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlforge/" class="drawer-node-card active-hub">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLFORGE</span>
+                    <span class="node-card-role" style="color: var(--color-blue);">[WORKFORCE LAYER]</span>
+                </div>
+                <div class="node-card-desc">Durable roles, replaceable runtimes, deterministic matching, and inspectable handoff contracts for AI workers.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlproof/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLPROOF</span>
+                    <span class="node-card-role" style="color: var(--color-red);">[RED-TEAM QA]</span>
+                </div>
+                <div class="node-card-desc">Independent adversarial evaluation, falsification, reproducible findings, and evidence for verdicts.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlcreate/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLCREATE</span>
+                    <span class="node-card-role" style="color: var(--color-amber);">[CREATIVE SEARCH]</span>
+                </div>
+                <div class="node-card-desc">Computational creativity, open-ended problem exploration, reframing, and concept lineage.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlframe/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLFRAME</span>
+                    <span class="node-card-role" style="color: var(--color-magenta);">[VM &amp; COMPILER]</span>
+                </div>
+                <div class="node-card-desc">AI-native reasoning language, typed intermediate representation, and sandboxed bytecode VM.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlplane/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLPLANE</span>
+                    <span class="node-card-role" style="color: var(--color-blue);">[CONTROL PLANE]</span>
+                </div>
+                <div class="node-card-desc">Engineering control plane with deterministic routing, adversarial falsification, and human gates.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlchangeops/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLCHANGEOPS</span>
+                    <span class="node-card-role" style="color: var(--color-red);">[AUTHORITY GATE]</span>
+                </div>
+                <div class="node-card-desc">Governed release controller enforcing cryptographic human approvals and bounded Git mutations.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlrelay/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLRELAY</span>
+                    <span class="node-card-role" style="color: var(--color-cyan);">[CONTINUITY]</span>
+                </div>
+                <div class="node-card-desc">Persistent asynchronous work coordination, durable journals, and resumable execution handoffs.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlnotes/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLNOTES</span>
+                    <span class="node-card-role" style="color: var(--color-cyan);">[KNOWLEDGE NOTEBOOK]</span>
+                </div>
+                <div class="node-card-desc">Engineering knowledge notebook &amp; full-stack dogfood consumer proving native persistent storage.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlboard/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLBOARD</span>
+                    <span class="node-card-role" style="color: var(--color-amber);">[EVALUATION SURFACE]</span>
+                </div>
+                <div class="node-card-desc">Observation console and full-stack deterministic task state machine application.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howlwriter/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLWRITER</span>
+                    <span class="node-card-role" style="color: var(--color-magenta);">[WRITING CONTROL]</span>
+                </div>
+                <div class="node-card-desc">Writing control system for voice preservation, deterministic style linting, humanization, and review.</div>
+            </a>
+
+            <a href="https://howlcipher.github.io/howldream/" class="drawer-node-card">
+                <div class="node-card-top">
+                    <span class="node-card-name">HOWLDREAM</span>
+                    <span class="node-card-role" style="color: var(--color-khaki);">[CONTROLLED DIVERGENCE]</span>
+                </div>
+                <div class="node-card-desc">Controlled divergent experiments, hallucination testing, failure analysis, and scoped verification.</div>
+            </a>
+
+        </div>
+        <div class="drawer-footer">
+            <span>● 14 ECOSYSTEM NODES</span>
+            <span>AUTH // HOWL 2026</span>
+        </div>
+    </aside>
+
+    <div class="layout-container">
+        <header class="site-header">
+            <div class="header-top">
+                <div class="header-brand">
+                    <a href="https://howlcipher.github.io/howlforge/" class="brand-sig">HOWL <span>//</span> FORGE</a>
+                    <span class="subsystem-tag">SYS_ID: HFRG-WORKFORCE-12</span>
+                </div>
+                <div class="header-actions">
+                    <button id="eco-menu-toggle" class="btn-eco-toggle" type="button" aria-expanded="false" aria-controls="eco-drawer" aria-label="Toggle Howl Ecosystem Directory">
+                        <span aria-hidden="true">☰</span> [ECOSYSTEM]
+                    </button>
+                    <button id="theme-toggle" class="btn-theme-toggle" type="button" aria-pressed="false">
+                        <span aria-hidden="true">☾</span> [DARK_MODE]
+                    </button>
+                    <a href="https://github.com/howlcipher/howlforge" class="btn-tech btn-tech-primary" target="_blank" rel="noreferrer">
+                        [ GITHUB REPO ]
+                    </a>
+                </div>
+            </div>
+
+            <nav class="section-nav" aria-label="Page sections">
+                <span class="section-nav-label">READ_PATH:</span>
+                <a href="#problem">01_Problem</a>
+                <a href="#pack">02_ThePack</a>
+                <a href="#flow">03_HowItWorks</a>
+                <a href="#providers">04_Providers</a>
+                <a href="#ecosystem">05_Ecosystem</a>
+                <a href="#philosophy">06_Philosophy</a>
+                <a href="#getting-started">07_QuickStart</a>
+                <a href="#status">08_Status</a>
+            </nav>
+        </header>
+
+        <main id="main-content">
+            <section class="hero-panel" aria-labelledby="main-title">
+                <div class="hero-banner">
+                    <span>SPEC_VER // V1 LIBRARY + CLI (EARLY)</span>
+                    <span>ARCHITECTURE: ROLES · CAPABILITIES · MATCHING · HANDOFFS</span>
+                </div>
+                <div class="hero-body">
+                    <div class="hero-header-block">
+                        <p class="hero-kicker">// workforce definition / runtime selection / provider-neutral matching</p>
+                        <h1 id="main-title" class="hero-title">HowlForge <span class="jp-sub">ハウルフォージ // 2026</span></h1>
+                        <p class="hero-lead">
+                            Your AI agents aren’t a pile of tools. They’re a software team.
+                            HowlForge defines durable roles, declares available runtimes, ranks eligible workers with reasons, and validates handoff evidence so another worker can safely resume.
+                        </p>
+                    </div>
+
+                    <div class="axiom-card" role="region" aria-label="Governing Principle" style="border-left-color: var(--color-blue);">
+                        <strong style="color: var(--color-blue);">AXIOM // ROLES ARE DURABLE. MODELS ARE REPLACEABLE. SESSIONS ARE DISPOSABLE.</strong>
+                        An architect is a role. Claude Opus is a runtime. The two are never equated, because the day the model changes, the role has to survive it.
+                    </div>
+
+                    <div class="hero-actions">
+                        <a href="https://github.com/howlcipher/howlforge" class="btn-tech btn-tech-primary" target="_blank" rel="noreferrer">
+                            [ GITHUB ]
+                        </a>
+                        <a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/README.md" class="btn-tech" target="_blank" rel="noreferrer">
+                            [ DOCUMENTATION ]
+                        </a>
+                        <a href="https://howlcipher.github.io/howl/" class="btn-tech">
+                            [ EXPLORE THE HOWL ECOSYSTEM ]
+                        </a>
+                    </div>
+
+                    <div class="hero-diagram-wrap" aria-label="HowlForge responsibility boundary">
+                        <div class="diagram-header">
+                            <span>BOUNDARY // SELECT AND EXPLAIN — NEVER LAUNCH</span>
+                            <span>GO LIBRARY + CLI</span>
+                        </div>
+                        <div class="adversary-grid">
+                            <div class="adversary-card">
+                                <div class="adversary-name">01 // Roles</div>
+                                <p class="adversary-question">What work exists, and what capabilities does it require?</p>
+                            </div>
+                            <div class="adversary-card">
+                                <div class="adversary-name">02 // Runtimes</div>
+                                <p class="adversary-question">Which providers, models, and clients are declared — and available now?</p>
+                            </div>
+                            <div class="adversary-card">
+                                <div class="adversary-name">03 // Match</div>
+                                <p class="adversary-question">Who is eligible, in what order, and why?</p>
+                            </div>
+                            <div class="adversary-card">
+                                <div class="adversary-name">04 // Handoff</div>
+                                <p class="adversary-question">If a worker disappears, what evidence must exist to resume safely?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tech-panel" id="problem" aria-labelledby="problem-heading">
+                <div class="tech-header">
+                    <span class="sec-id">01</span>
+                    <h2 id="problem-heading">What Forge solves</h2>
+                </div>
+                <div class="tech-body">
+                    <p>
+                        Developers increasingly have multiple AI coding agents available, but those agents usually operate independently —
+                        without shared roles, ownership, handoffs, or an inspectable reason for why one worker was chosen over another.
+                    </p>
+                    <div class="grid-2col">
+                        <div>
+                            <h3>Without structure</h3>
+                            <ul class="status-list">
+                                <li class="fail">A role becomes a synonym for whichever model is configured</li>
+                                <li class="fail">When a session ends, the role effectively ends with it</li>
+                                <li class="fail">Handoffs are informal or missing</li>
+                                <li class="fail">Routing decisions cannot be explained after the fact</li>
+                                <li class="fail">Provider churn breaks institutional memory</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>With HowlForge</h3>
+                            <ul class="status-list">
+                                <li class="pass">Roles declare responsibilities and capability floors</li>
+                                <li class="pass">Runtimes declare aptitude separately from authority</li>
+                                <li class="pass">Matching is deterministic and rejection-staged</li>
+                                <li class="pass">Handoff and resume contracts are validated</li>
+                                <li class="pass">Verification requirements are recorded — not executed here</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="table-wrap" style="margin-top: 1.25rem;">
+                        <table>
+                            <caption>What HowlForge is not</caption>
+                            <thead>
+                                <tr><th scope="col">Concern</th><th scope="col">Owner</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Launching workers, retries, scheduling</td><td><a href="https://howlcipher.github.io/howlplane/">HowlPlane</a></td></tr>
+                                <tr><td>Moving and storing checkpoints</td><td><a href="https://howlcipher.github.io/howlrelay/">HowlRelay</a></td></tr>
+                                <tr><td>What a worker may do (authority)</td><td><a href="https://howlcipher.github.io/howlframe/">HowlFrame</a></td></tr>
+                                <tr><td>Running verification</td><td><a href="https://howlcipher.github.io/howlproof/">HowlProof</a></td></tr>
+                                <tr><td>Semantic “should we?” judgments</td><td><a href="https://howlcipher.github.io/howlInstinct/">HowlInstinct</a></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tech-panel" id="pack" aria-labelledby="pack-heading">
+                <div class="tech-header">
+                    <span class="sec-id">02</span>
+                    <h2 id="pack-heading">The Pack — shipped example roles</h2>
+                </div>
+                <div class="tech-body">
+                    <p>
+                        Roles are data, not code. The repository ships an example pack under <code>config/roles/</code>.
+                        Real organizations may branch, add, or replace roles — the graph below is representative, not a fixed hierarchy.
+                    </p>
+                    <div class="code-container" role="img" aria-label="Representative pack structure with foreman coordinating specialists">
+                        <div class="code-header">
+                            <span class="code-title">[PACK // EXAMPLE ROLE GRAPH]</span>
+                            <span class="subsystem-tag">config/roles/</span>
+                        </div>
+<pre><code>                         ┌─────────────┐
+                         │   product   │  scope &amp; acceptance
+                         └──────┬──────┘
+                                ▼
+                         ┌─────────────┐
+                         │   foreman   │  decompose · delegate · recover
+                         └──────┬──────┘
+            ┌───────────┬───────┼───────┬───────────┐
+            ▼           ▼       ▼       ▼           ▼
+      ┌──────────┐ ┌────────┐ ┌────┐ ┌────────┐ ┌──────────┐
+      │architect │ │implement│ │ qa │ │devops  │ │ security │
+      └────┬─────┘ └────┬───┘ └─┬──┘ └───┬────┘ └────┬─────┘
+           │            │       │        │           │
+           ▼            ▼       ▼        ▼           ▼
+      ┌──────────┐ ┌────────┐ ┌────┐ ┌────────┐ ┌──────────┐
+      │researcher│ │reviewer│ │sre │ │auditor │ │ (custom) │
+      └──────────┘ └────────┘ └────┘ └────────┘ └──────────┘
+
+Textual equivalent: product → foreman → {architect, implementer, qa, devops, security,
+researcher, reviewer, sre, auditor} with branching ownership rather than a single line.</code></pre>
+                    </div>
+                    <div class="adversary-grid" style="margin-top: 1.25rem;">
+                        <article class="adversary-card"><div class="adversary-name">product</div><p>Defines scope, requirements and acceptance criteria.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">foreman</div><p>Coordinates complex work and delegates to specialists.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">architect</div><p>Designs system structure and evaluates trade-offs.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">implementer</div><p>Writes and modifies code against a defined specification.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">qa</div><p>Exercises behavior to find defects the implementer did not.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">reviewer</div><p>Independently falsifies a change rather than confirming it.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">devops</div><p>Builds and maintains packaging and deployment paths.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">sre</div><p>Protects reliability, diagnoses incidents, reduces recurrence.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">security</div><p>Assesses changes for security defects and unsafe authority use.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">researcher</div><p>Gathers evidence to ground decisions.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">auditor</div><p>Independently audits evidence and authority decisions after the fact.</p></article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tech-panel" id="flow" aria-labelledby="flow-heading">
+                <div class="tech-header">
+                    <span class="sec-id">03</span>
+                    <h2 id="flow-heading">How it works</h2>
+                </div>
+                <div class="tech-body">
+                    <p>
+                        HowlForge answers workforce questions inside a larger engineering loop owned by sibling components.
+                        Matching itself is a deterministic filter then rank — never an execution step.
+                    </p>
+                    <div class="loop" aria-label="Conceptual engineering loop involving HowlForge">
+                        <div class="loop-step"><strong>01 // IDEA</strong>Work enters via Board / Product / Dream / Create.</div>
+                        <div class="loop-step"><strong>02 // JUDGE</strong>HowlInstinct may answer bounded “should we?” questions.</div>
+                        <div class="loop-step"><strong>03 // ROLE</strong>HowlForge resolves which role owns the work.</div>
+                        <div class="loop-step"><strong>04 // MATCH</strong>Eligible runtimes ranked with rejection stages and reasons.</div>
+                        <div class="loop-step elsewhere"><strong>05 // BUILD</strong>HowlPlane launches; Forge does not.</div>
+                        <div class="loop-step"><strong>06 // REVIEW / TEST</strong>Reviewer and QA roles; verification recorded as a requirement.</div>
+                        <div class="loop-step"><strong>07 // SECURE / RELEASE</strong>HowlFrame authority + HowlChangeOps gates.</div>
+                        <div class="loop-step"><strong>08 // OBSERVE</strong>SRE / Board / Relay continuity; rematch on session loss.</div>
+                        <div class="loop-return">↺ Feedback returns as new work — roles survive, sessions do not</div>
+                    </div>
+
+                    <h3>Matching pipeline (as implemented)</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="code-title">[MATCH // HARD FILTER THEN RANK]</span>
+                            <span class="subsystem-tag">DETERMINISTIC</span>
+                        </div>
+<pre><code>Phase 1 — hard filter (first reject wins):
+  request_excluded → role_excluded → disabled → capability → requirement → availability
+
+Phase 2 — rank key (total order):
+  prefer-hint → declared preference → availability rank → capability surplus → runtime id
+
+Every rejection carries a machine-readable stage code and a human sentence.
+Each candidate records decided_by naming the first term that placed it.</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tech-panel" id="providers" aria-labelledby="providers-heading">
+                <div class="tech-header">
+                    <span class="sec-id">04</span>
+                    <h2 id="providers-heading">Provider independence</h2>
+                </div>
+                <div class="tech-body">
+                    <p>
+                        HowlForge organizes capabilities rather than binding the system to one model vendor.
+                        Roles prefer <em>selectors</em> (<code>provider</code> + <code>model</code>), not runtime ids, so a new client for the same model becomes a candidate without editing the role.
+                    </p>
+                    <div class="adversary-grid">
+                        <article class="adversary-card"><div class="adversary-name">Claude / Claude Code</div><p>Anthropic models via declared runtimes.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">Codex</div><p>OpenAI models through Codex CLI clients.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">Cursor</div><p>Same models through Cursor agent runtimes.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">Grok / Grok Bot</div><p>xAI runtimes as first-class peers.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">AGY / Antigravity</div><p>Gemini-family clients in the example pack.</p></article>
+                        <article class="adversary-card"><div class="adversary-name">Local / Ollama</div><p>Locality-aware runtimes without special-casing the matcher.</p></article>
+                    </div>
+                    <p class="small" style="margin-top: 1rem;">
+                        Capability levels in the example config are <strong>operator expectations, not benchmark results</strong>.
+                        Aptitude (HowlForge) and authority (HowlFrame) are separate vocabularies and must never be conflated.
+                    </p>
+                </div>
+            </section>
+
+            <section class="tech-panel" id="ecosystem" aria-labelledby="ecosystem-heading">
+                <div class="tech-header">
+                    <span class="sec-id">05</span>
+                    <h2 id="ecosystem-heading">How Forge connects to Howl</h2>
+                </div>
+                <div class="tech-body">
+                    <p>
+                        Conceptual placement inside the broader Howl stack. This is a responsibility map, not a claim that every edge is already wired in production.
+                    </p>
+                    <div class="code-container" role="img" aria-label="Ecosystem responsibility flow including HowlForge">
+                        <div class="code-header">
+                            <span class="code-title">[ECOSYSTEM // RESPONSIBILITY FLOW]</span>
+                            <span class="subsystem-tag">CONCEPTUAL</span>
+                        </div>
+<pre><code>HUMAN OWNER
+    │
+    ▼
+HowlDream / HowlCreate     ideas &amp; exploration
+    │
+    ▼
+HowlInstinct               “Should we do this, and why?”
+    │
+    ▼
+HowlForge                  “Who should do it, and with what runtime?”
+    │
+    ▼
+HowlPlane                  “How do we coordinate and launch it?”
+    │
+    ├──────────────┬────────────────┐
+    ▼              ▼                ▼
+HowlFrame      HowlRelay      HowlChangeOps
+authority      handoffs       governed change
+    │
+    ▼
+HowlProof                  independent assurance
+
+Organization layer: HowlFutureWorks · Work surface: HowlBoard
+Related: HowlWriter · HowlNotes · Howl Hub</code></pre>
+                    </div>
+                    <p class="small">
+                        Documented integration contracts: <a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/docs/INTEGRATION.md">docs/INTEGRATION.md</a>.
+                        HowlForge never launches a worker — HowlPlane does.
+                    </p>
+                </div>
+            </section>
+
+            <section class="tech-panel" id="philosophy" aria-labelledby="philosophy-heading">
+                <div class="tech-header">
+                    <span class="sec-id">06</span>
+                    <h2 id="philosophy-heading">Philosophy</h2>
+                </div>
+                <div class="tech-body">
+                    <div class="grid-2col">
+                        <div>
+                            <h3>Specialized agents beat undifferentiated swarms</h3>
+                            <p>Explicit roles with ownership beat interchangeable chatbots competing for the same undifferentiated task.</p>
+                        </div>
+                        <div>
+                            <h3>Inspectable decisions</h3>
+                            <p>Matching rejects with stages and reasons. Ranking records <code>decided_by</code>. Preference hints never change eligibility.</p>
+                        </div>
+                        <div>
+                            <h3>Provider independence</h3>
+                            <p>Roles survive model and client churn. Selectors match on provider/model wildcards.</p>
+                        </div>
+                        <div>
+                            <h3>Humans remain in control</h3>
+                            <p>Forge reports what a worker can do (aptitude). It never grants what a worker may do (authority).</p>
+                        </div>
+                        <div>
+                            <h3>Evidence over vibes</h3>
+                            <p>Handoff bundles validate shape and resume safety; verification requirements are explicit.</p>
+                        </div>
+                        <div>
+                            <h3>Recoverable failures</h3>
+                            <p>When a session dies, rematch and resume against validated checkpoints — do not reinvent the role.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tech-panel" id="getting-started" aria-labelledby="start-heading">
+                <div class="tech-header">
+                    <span class="sec-id">07</span>
+                    <h2 id="start-heading">Quick start</h2>
+                </div>
+                <div class="tech-body">
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="code-title">[QUICKSTART // GO LIBRARY + CLI]</span>
+                            <button class="btn-copy" type="button">[COPY]</button>
+                        </div>
+<pre><code>git clone https://github.com/howlcipher/howlforge
+cd howlforge
+make build
+
+./build/howlforge --config config validate
+./build/howlforge --config config roles
+./build/howlforge --config config match foreman</code></pre>
+                    </div>
+                    <p class="small">
+                        The shipped <code>config/</code> tree is marked as an example throughout and is meant to be replaced.
+                        Further reading: <a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/docs/CLI.md">CLI</a> ·
+                        <a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/docs/HANDOFF.md">Handoff</a> ·
+                        <a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/ARCHITECTURE.md">Architecture</a>.
+                    </p>
+                </div>
+            </section>
+
+            <section class="tech-panel" id="status" aria-labelledby="status-heading">
+                <div class="tech-header">
+                    <span class="sec-id">08</span>
+                    <h2 id="status-heading">Status &amp; repository</h2>
+                </div>
+                <div class="tech-body">
+                    <div class="boundary-panel">
+                        <p class="boundary-claim">Early library and CLI — not a claim of production readiness.</p>
+                        <ul>
+                            <li>Repository: <a href="https://github.com/howlcipher/howlforge">github.com/howlcipher/howlforge</a></li>
+                            <li>Language: Go library + CLI; starts only <code>git</code> for resume safety checks</li>
+                            <li>A runtime definition can never cause anything to be executed</li>
+                            <li>Sibling integrations are contracts and adoption paths — not silently claimed as live wiring</li>
+                            <li>No benchmarks, release maturity claims, or invented production deployments appear on this page</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-telemetry">
+                <div class="status-indicator">
+                    <span class="status-dot" aria-hidden="true" style="background: var(--color-blue); box-shadow: 0 0 6px var(--color-blue);"></span>
+                    <span>SYS_STATUS: ACTIVE // HOWLFORGE-WORKFORCE-NODE</span>
+                </div>
+                <div><a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/LICENSE" style="color: var(--color-cyan); text-decoration: underline;">MIT LICENSE</a> // HOWL 2026</div>
+            </div>
+            <div class="footer-links">
+                <nav class="footer-nav" aria-label="Ecosystem Links">
+                    <a href="https://howlcipher.github.io/howl/">Howl Hub</a>
+                    <a href="https://howlcipher.github.io/howl/ecosystem.html">Ecosystem</a>
+                    <a href="https://howlcipher.github.io/HowlFutureWorks/">HowlFutureWorks</a>
+                    <a href="https://howlcipher.github.io/howlInstinct/">HowlInstinct</a>
+                    <a href="https://howlcipher.github.io/howlforge/">HowlForge</a>
+                    <a href="https://howlcipher.github.io/howlproof/">HowlProof</a>
+                    <a href="https://howlcipher.github.io/howlcreate/">HowlCreate</a>
+                    <a href="https://howlcipher.github.io/howlframe/">HowlFrame</a>
+                    <a href="https://howlcipher.github.io/howlplane/">HowlPlane</a>
+                    <a href="https://howlcipher.github.io/howlchangeops/">HowlChangeOps</a>
+                    <a href="https://howlcipher.github.io/howlrelay/">HowlRelay</a>
+                    <a href="https://howlcipher.github.io/howlnotes/">HowlNotes</a>
+                    <a href="https://howlcipher.github.io/howlboard/">HowlBoard</a>
+                    <a href="https://howlcipher.github.io/howlwriter/">HowlWriter</a>
+                    <a href="https://howlcipher.github.io/howldream/">HowlDream</a>
+                </nav>
+                <a href="#main-content">[ BACK TO TOP ]</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
