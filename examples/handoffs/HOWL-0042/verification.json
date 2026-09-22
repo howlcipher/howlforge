@@ -1,0 +1,22 @@
+{
+  "schema_version": "howlforge.verification/v1",
+  "independent": false,
+  "verifier_role": "",
+  "verifier_runtime": "",
+  "checks": [
+    {
+      "name": "go test ./internal/runtimes/",
+      "command": "go test ./internal/runtimes/",
+      "status": "passed",
+      "result": "ok github.com/howlcipher/howlforge/internal/runtimes",
+      "observed_at": "2026-09-22T13:58:02Z"
+    },
+    {
+      "name": "go vet ./internal/runtimes/",
+      "command": "go vet ./internal/runtimes/",
+      "status": "passed",
+      "result": "no findings",
+      "observed_at": "2026-09-22T13:58:20Z"
+    }
+  ]
+}

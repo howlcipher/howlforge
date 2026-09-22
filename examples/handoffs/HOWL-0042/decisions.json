@@ -1,0 +1,17 @@
+{
+  "schema_version": "howlforge.decisions/v1",
+  "decisions": [
+    {
+      "id": "D1",
+      "decision": "Runtime definitions carry no command or argument field",
+      "rationale": "A configuration file must never be able to cause HowlForge to execute a provider. Strict decoding refuses any such field.",
+      "reversible": false
+    },
+    {
+      "id": "D2",
+      "decision": "Runtime capabilities are declared per resource rather than per model",
+      "rationale": "The same model reached through two clients differs in tool use and long horizon behavior, so the client is part of the identity.",
+      "reversible": true
+    }
+  ]
+}
