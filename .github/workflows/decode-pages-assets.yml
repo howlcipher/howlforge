@@ -1,0 +1,64 @@
+name: Decode Pages Assets
+on:
+  push:
+    branches: ["cursor/howlforge-pages-4ad1"]
+    paths:
+      - "docs/*.zlib.b64"
+      - "docs/*.zlib.b64.part*"
+      - ".github/workflows/decode-pages-assets.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: decode-pages-assets-howlforge
+  cancel-in-progress: true
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Assemble and decode index.html
+        run: |
+          python3 <<'PY'
+          import base64, zlib, pathlib, re, os
+          docs = pathlib.Path("docs")
+          parts = sorted(docs.glob("index.html.zlib.b64.part*"), key=lambda p: p.name)
+          if not parts:
+              raise SystemExit("No index.html.zlib.b64.part* files found")
+          # Prefer zero-padded numeric parts (part00, part01, ...) over unpadded
+          def part_key(p):
+              m = re.search(r"\.part(\d+)$", p.name)
+              return int(m.group(1)) if m else p.name
+          parts = sorted(parts, key=part_key)
+          assembled = "".join("".join(p.read_text().split()) for p in parts)
+          print(f"assembled {len(assembled)} chars from {len(parts)} parts: {[p.name for p in parts]}")
+          data = zlib.decompress(base64.urlsafe_b64decode(assembled))
+          if b"HowlForge" not in data or b"Your AI agents" not in data:
+              raise SystemExit("Decoded HTML missing required verification strings")
+          if len(data) < 30000:
+              raise SystemExit(f"Decoded HTML too small: {len(data)}")
+          (docs / "index.html").write_bytes(data)
+          print(f"wrote docs/index.html ({len(data)} bytes)")
+          # remove part files and assembled intermediate if any
+          for p in docs.glob("index.html.zlib.b64*"):
+              p.unlink()
+              print("deleted", p)
+          wf = pathlib.Path(".github/workflows/decode-pages-assets.yml")
+          if wf.is_file():
+              wf.unlink()
+              print("deleted", wf)
+          PY
+      - name: Commit restored index.html and cleanup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A docs/index.html docs/index.html.zlib.b64* .github/workflows/decode-pages-assets.yml || true
+          # also stage deletions
+          git add -u docs/ .github/workflows/ || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git status
+            git commit -m "Restore static docs/index.html for HowlForge Pages"
+            git push
+          fi
