@@ -1,0 +1,67 @@
+name: Decode Pages Assets
+on:
+  push:
+    branches: ["cursor/howlforge-pages-4ad1"]
+    paths:
+      - "docs/*.zlib.b64"
+      - "docs/*.zlib.b64.part*"
+      - ".github/workflows/decode-pages-assets.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: decode-pages-assets-howlforge
+  cancel-in-progress: true
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Assemble and decode assets
+        run: |
+          python3 <<'PY'
+          import base64, zlib, hashlib, pathlib
+          docs = pathlib.Path("docs")
+          parts = sorted(docs.glob("index.html.zlib.b64.part*"), key=lambda p: p.name)
+          if parts:
+              assembled = "".join("".join(p.read_text().split()) for p in parts)
+              (docs / "index.html.zlib.b64").write_text(assembled + "\n")
+              print("assembled index.html.zlib.b64", len(assembled), "from", len(parts), "parts")
+          expected = {
+            "style.css": "c60708f3154fe019fe2028c20678a6c8ab74ff2aa64722f587007e40921e80bb",
+            "index.html": "2556e8deafb507b23bc2f478b2d8a252bfc3c6b533b465a04c40234d11d0235b",
+          }
+          mapping = {
+            "style.css.zlib.b64": "style.css",
+            "index.html.zlib.b64": "index.html",
+          }
+          for src, dst in mapping.items():
+              path = docs / src
+              if not path.is_file():
+                  print(f"missing {src}, skip")
+                  continue
+              raw = "".join(path.read_text().split())
+              try:
+                  data = zlib.decompress(base64.urlsafe_b64decode(raw))
+              except Exception as e:
+                  print(f"SKIP {dst}: decompress failed: {e}")
+                  continue
+              digest = hashlib.sha256(data).hexdigest()
+              if digest != expected[dst]:
+                  print(f"SKIP {dst}: digest {digest} != {expected[dst]}")
+                  continue
+              (docs / dst).write_bytes(data)
+              print(f"wrote docs/{dst} ({len(data)} bytes, sha256={digest})")
+          PY
+      - name: Commit decoded assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/style.css docs/index.html || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git status
+            git commit -m "Add decoded docs/style.css and docs/index.html for HowlForge Pages"
+            git push
+          fi
