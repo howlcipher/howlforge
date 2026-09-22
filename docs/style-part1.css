@@ -1,0 +1,389 @@
+/* ==========================================================================
+   HOWL ECOSYSTEM // SHARED VISUAL SYSTEM
+   Project: HOWL (Unified Ecosystem Portal & Hub)
+   Design Language: 2026 Science SARU / Ghost in the Shell Retro-Futurist Industrial
+   Theme: Central Ecosystem Architecture, Navy/Cyan/Blue foundation,
+          Engineered Interoperability Map, warm Shell White surface.
+   ========================================================================== */
+
+:root {
+  /* Core Howl Primitive Palette */
+  --howl-near-black: #14191C;
+  --howl-gunmetal:   #353B3D;
+  --howl-navy:       #102A43;
+
+  --howl-blue:       #087FAF;
+  --howl-cyan:       #28B7D8;
+
+  --howl-red:        #D94732;
+  --howl-magenta:    #E21D68;
+  --howl-amber:      #F2A91B;
+
+  --howl-shell:      #E7E1CE;
+  --howl-khaki:      #827C68;
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, Cantarell, "Adwaita Sans", sans-serif;
+  --font-mono: "SF Mono", "Cascadia Code", "Source Code Pro", "Fira Code", Hack, Menlo, Monaco, Consolas, "Liberation Mono", "Adwaita Mono", monospace;
+
+  /* Light Theme */
+  --bg-primary:        #E7E1CE;
+  --bg-surface:        #F2EDE0;
+  --bg-sunken:         #DCD5C0;
+  --bg-panel:          #FAF7F0;
+  --bg-header-band:    #102A43;
+  --bg-code:           #14191C;
+  --bg-code-header:    #1C2327;
+
+  --text-primary:      #14191C;
+  --text-secondary:    #353B3D;
+  --text-muted:        #544F43;
+  --text-dim:          #827C68;
+  --text-on-dark:      #E7E1CE;
+  --text-code:         #E7E1CE;
+
+  --border-subtle:     #C9C2AD;
+  --border-medium:     #9E9680;
+  --border-strong:     #102A43;
+  --border-tech:       #353B3D;
+
+  --color-cyan:        #0E7891;
+  --color-cyan-chip:   #28B7D8;
+  --color-blue:        #087FAF;
+  --color-red:         #C23825;
+  --color-red-chip:    #D94732;
+  --color-magenta:     #C41256;
+  --color-amber:       #9E6800;
+  --color-amber-chip:  #F2A91B;
+  --color-navy:        #102A43;
+  --color-khaki:       #827C68;
+
+  --shadow-flat:       0 1px 2px rgba(20, 25, 28, 0.08);
+  --shadow-tech:       2px 2px 0px rgba(16, 42, 67, 0.18);
+  --shadow-panel:      3px 3px 0px rgba(16, 42, 67, 0.25);
+
+  --grid-line:         rgba(53, 59, 61, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg-primary:        #14191C;
+  --bg-surface:        #1B2226;
+  --bg-sunken:         #0E1214;
+  --bg-panel:          #1F282D;
+  --bg-header-band:    #102A43;
+  --bg-code:           #0E1214;
+  --bg-code-header:    #161E22;
+
+  --text-primary:      #E7E1CE;
+  --text-secondary:    #B8B19E;
+  --text-muted:        #827C68;
+  --text-dim:          #59666E;
+  --text-on-dark:      #E7E1CE;
+  --text-code:         #E7E1CE;
+
+  --border-subtle:     #283339;
+  --border-medium:     #3D4D56;
+  --border-strong:     #28B7D8;
+  --border-tech:       #087FAF;
+
+  --color-cyan:        #28B7D8;
+  --color-cyan-chip:   #28B7D8;
+  --color-blue:        #087FAF;
+  --color-red:         #D94732;
+  --color-red-chip:    #D94732;
+  --color-magenta:     #E21D68;
+  --color-amber:       #F2A91B;
+  --color-amber-chip:  #F2A91B;
+  --color-navy:        #1B3F63;
+  --color-khaki:       #827C68;
+
+  --shadow-flat:       0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-tech:       2px 2px 0px rgba(0, 0, 0, 0.6);
+  --shadow-panel:      3px 3px 0px rgba(0, 0, 0, 0.7);
+
+  --grid-line:         rgba(231, 225, 206, 0.04);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  background: var(--color-blue);
+  color: var(--text-on-dark);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  z-index: 1000;
+  text-decoration: none;
+  border: 1px solid var(--howl-shell);
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+
+.layout-container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 3rem 1rem;
+}
+
+@media (max-width: 480px) {
+  .layout-container {
+    padding: 0.75rem 0.6rem 2rem 0.6rem;
+  }
+}
+
+/* Header */
+.site-header {
+  border: 1px solid var(--border-medium);
+  background: var(--bg-panel);
+  box-shadow: var(--shadow-tech);
+  margin-bottom: 1.25rem;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--bg-header-band);
+  color: var(--text-on-dark);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.brand-sig {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+  letter-spacing: 0.05em;
+  color: var(--howl-shell);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand-sig span {
+  color: var(--howl-cyan);
+}
+
+.subsystem-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: rgba(40, 183, 216, 0.15);
+  color: var(--howl-cyan);
+  border: 1px solid var(--howl-cyan);
+  padding: 0.15rem 0.4rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-tech {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.45rem 0.85rem;
+  min-height: 38px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-flat);
+  transition: background 0.15s, border-color 0.15s;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.btn-tech:hover {
+  background: var(--bg-primary);
+  border-color: var(--color-blue);
+}
+
+.btn-tech-primary {
+  background: var(--color-blue);
+  color: var(--howl-shell);
+  border-color: var(--color-blue);
+}
+.btn-tech-primary:hover {
+  background: #066992;
+  border-color: var(--howl-cyan);
+}
+
+.btn-theme-toggle {
+  background: transparent;
+  color: var(--howl-shell);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.65rem;
+  min-height: 38px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+.btn-theme-toggle:hover {
+  border-color: var(--howl-cyan);
+  color: var(--howl-cyan);
+}
+
+.btn-eco-toggle {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.45rem 0.85rem;
+  min-height: 38px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+.btn-eco-toggle:hover {
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+}
+
+/* In-Page Nav */
+.section-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-surface);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.section-nav-label {
+  font-weight: 700;
+  color: var(--text-dim);
+  margin-right: 0.25rem;
+  white-space: nowrap;
+}
+
+.section-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.section-nav a:hover {
+  background: var(--bg-panel);
+  border-color: var(--border-medium);
+  color: var(--color-blue);
+}
+
+/* ==========================================================================
+   HAMBURGER / ECOSYSTEM DRAWER
+   ========================================================================== */
+
+.eco-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 42, 67, 0.7);
+  backdrop-filter: blur(2px);
+  z-index: 2000;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.eco-drawer-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+.eco-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(480px, 100vw);
+  max-width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg-panel);
+  border-left: 2px solid var(--border-strong);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.35);
+  z-index: 2001;
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  visibility: hidden;
+}
+
+.eco-drawer.active {
+  transform: translateX(0);
+  visibility: visible;
+}
