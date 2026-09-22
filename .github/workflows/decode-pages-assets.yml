@@ -17,29 +17,54 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-      - name: Assemble and decode index.html
+        with:
+          fetch-depth: 0
+      - name: Restore static docs/index.html
         run: |
           python3 <<'PY'
-          import base64, zlib, pathlib, re, os
+          import pathlib, re, subprocess, urllib.request
           docs = pathlib.Path("docs")
-          parts = sorted(docs.glob("index.html.zlib.b64.part*"), key=lambda p: p.name)
-          if not parts:
-              raise SystemExit("No index.html.zlib.b64.part* files found")
-          # Prefer zero-padded numeric parts (part00, part01, ...) over unpadded
-          def part_key(p):
-              m = re.search(r"\.part(\d+)$", p.name)
-              return int(m.group(1)) if m else p.name
-          parts = sorted(parts, key=part_key)
-          assembled = "".join("".join(p.read_text().split()) for p in parts)
-          print(f"assembled {len(assembled)} chars from {len(parts)} parts: {[p.name for p in parts]}")
-          data = zlib.decompress(base64.urlsafe_b64decode(assembled))
-          if b"HowlForge" not in data or b"Your AI agents" not in data:
-              raise SystemExit("Decoded HTML missing required verification strings")
-          if len(data) < 30000:
-              raise SystemExit(f"Decoded HTML too small: {len(data)}")
+          # Prefer assembling zlib urlsafe-b64 parts when present and valid
+          restored = None
+          parts = sorted(
+              docs.glob("index.html.zlib.b64.part*"),
+              key=lambda p: int(re.search(r"\.part(\d+)$", p.name).group(1)),
+          )
+          if parts:
+              import base64, zlib
+              assembled = "".join("".join(p.read_text().split()) for p in parts)
+              try:
+                  data = zlib.decompress(base64.urlsafe_b64decode(assembled))
+                  if len(data) >= 30000 and b"HowlForge" in data and b"Your AI agents" in data:
+                      restored = data
+                      print(f"decoded from {len(parts)} parts ({len(data)} bytes)")
+                  else:
+                      print("parts decoded but failed verification; falling back")
+              except Exception as e:
+                  print(f"parts decode failed ({e}); falling back")
+
+          if restored is None:
+              # Last known good full static page
+              url = (
+                  "https://raw.githubusercontent.com/howlcipher/howlforge/"
+                  "ced2cf6110985c19ab543a640df0f0f54507c3ff/docs/index.html"
+              )
+              with urllib.request.urlopen(url, timeout=60) as resp:
+                  restored = resp.read()
+              print(f"fetched last-good commit content ({len(restored)} bytes)")
+
+          text = restored.decode("utf-8")
+          # Optional: drop unpublished favicon.png alternate link
+          text = text.replace(
+              '    <link rel="alternate icon" type="image/png" href="favicon.png">\n',
+              "",
+          )
+          data = text.encode("utf-8")
+          if len(data) < 30000 or "HowlForge" not in text or "Your AI agents" not in text:
+              raise SystemExit("restored HTML failed verification")
           (docs / "index.html").write_bytes(data)
           print(f"wrote docs/index.html ({len(data)} bytes)")
-          # remove part files and assembled intermediate if any
+
           for p in docs.glob("index.html.zlib.b64*"):
               p.unlink()
               print("deleted", p)
@@ -53,7 +78,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A docs/index.html docs/index.html.zlib.b64* .github/workflows/decode-pages-assets.yml || true
-          # also stage deletions
           git add -u docs/ .github/workflows/ || true
           if git diff --cached --quiet; then
             echo "No changes to commit"
