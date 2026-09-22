@@ -1,0 +1,31 @@
+# EXAMPLE runtime definition, shipped so HowlForge is usable out of the box.
+# Capability levels are this operator's declared expectations, not benchmark
+# results and not claims about model quality. Override them freely.
+schema_version: howlforge.runtime/v1
+id: claude-code-opus
+description: Claude Opus reached through the Claude Code CLI.
+provider: anthropic
+model: opus
+runtime: claude-code
+economic_class: subscription
+locality: remote
+state:
+  enabled: true
+capabilities:
+  reasoning: very_high
+  coding: very_high
+  tool_use: very_high
+  long_horizon: very_high
+  context_window: high
+  research: high
+  planning: very_high
+  review: very_high
+  security: high
+  testing: high
+  documentation: high
+  speed: medium
+  cost_efficiency: medium
+  local_execution: none
+tags:
+  - subscription
+  - agentic-cli

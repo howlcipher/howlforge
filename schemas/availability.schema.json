@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "howlforge.availability/v1",
+  "title": "HowlForge Availability State",
+  "description": "Runtime availability as observed by whoever runs the workers. HowlForge only ever reads this file; HowlPlane and HowlRelay write it. That division is deliberate, so HowlForge can never be the component that trips a rate limit while checking for one.",
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "string", "const": "howlforge.availability/v1" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "runtimes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "runtime_id": { "type": "string", "minLength": 1 },
+          "state": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE", "BUSY", "DEGRADED", "SESSION_LIMIT", "QUOTA_LIMIT",
+              "RATE_LIMIT", "PROVIDER_UNAVAILABLE", "MODEL_UNAVAILABLE",
+              "AUTH_FAILURE", "WORKER_FAILURE", "UNKNOWN"
+            ],
+            "description": "AVAILABLE, DEGRADED and UNKNOWN are usable. A capacity condition (BUSY, SESSION_LIMIT, QUOTA_LIMIT, RATE_LIMIT) is expected to clear; a fault (AUTH_FAILURE, WORKER_FAILURE) is not."
+          },
+          "reason": { "type": "string" },
+          "reset_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When a capacity condition is expected to clear. Honored only for capacity conditions; a fault carrying one never reports as eligible after reset."
+          },
+          "observed_at": { "type": "string", "format": "date-time" },
+          "source": { "type": "string" }
+        },
+        "required": ["runtime_id", "state"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["schema_version", "runtimes"],
+  "additionalProperties": false
+}

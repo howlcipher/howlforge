@@ -1,0 +1,52 @@
+{
+  "schema_version": "howlforge.availability/v1",
+  "generated_at": "2026-09-22T14:02:00Z",
+  "runtimes": [
+    {
+      "runtime_id": "cursor-sol",
+      "state": "SESSION_LIMIT",
+      "reason": "session allowance exhausted at 14:01Z",
+      "reset_at": "2026-09-22T18:00:00Z",
+      "observed_at": "2026-09-22T14:01:44Z",
+      "source": "howlplane"
+    },
+    {
+      "runtime_id": "codex-cli-sol",
+      "state": "SESSION_LIMIT",
+      "reason": "shares the session allowance with cursor-sol",
+      "reset_at": "2026-09-22T18:00:00Z",
+      "observed_at": "2026-09-22T14:01:44Z",
+      "source": "howlplane"
+    },
+    {
+      "runtime_id": "claude-code-opus",
+      "state": "AVAILABLE",
+      "observed_at": "2026-09-22T14:01:50Z",
+      "source": "howlplane"
+    },
+    {
+      "runtime_id": "agy-gemini-flash",
+      "state": "AVAILABLE",
+      "observed_at": "2026-09-22T14:01:51Z",
+      "source": "howlplane"
+    },
+    {
+      "runtime_id": "cursor-composer",
+      "state": "AVAILABLE",
+      "observed_at": "2026-09-22T14:01:52Z",
+      "source": "howlplane"
+    },
+    {
+      "runtime_id": "gemini-cli-pro",
+      "state": "AVAILABLE",
+      "observed_at": "2026-09-22T14:01:53Z",
+      "source": "howlplane"
+    },
+    {
+      "runtime_id": "ollama-local",
+      "state": "AVAILABLE",
+      "observed_at": "2026-09-22T14:01:54Z",
+      "source": "howlplane"
+    }
+  ]
+}

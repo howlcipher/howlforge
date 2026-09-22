@@ -1,0 +1,29 @@
+# EXAMPLE runtime definition.
+schema_version: howlforge.runtime/v1
+id: agy-gemini-flash
+description: Gemini Flash reached through the Antigravity CLI.
+provider: google
+model: gemini-flash
+runtime: agy
+economic_class: subscription
+locality: remote
+state:
+  enabled: true
+capabilities:
+  reasoning: very_high
+  coding: high
+  tool_use: very_high
+  long_horizon: very_high
+  context_window: very_high
+  research: very_high
+  planning: high
+  review: high
+  security: medium
+  testing: high
+  documentation: high
+  speed: very_high
+  cost_efficiency: very_high
+  local_execution: none
+tags:
+  - subscription
+  - high-throughput

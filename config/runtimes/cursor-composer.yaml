@@ -1,0 +1,30 @@
+# EXAMPLE runtime definition. Composer is declared strong at coding and fast,
+# but only high on long_horizon, which is why it is not eligible for foreman.
+schema_version: howlforge.runtime/v1
+id: cursor-composer
+description: Composer reached through the Cursor agent.
+provider: cursor
+model: composer
+runtime: cursor
+economic_class: subscription
+locality: remote
+state:
+  enabled: true
+capabilities:
+  reasoning: high
+  coding: very_high
+  tool_use: high
+  long_horizon: high
+  context_window: medium
+  research: low
+  planning: medium
+  review: medium
+  security: medium
+  testing: high
+  documentation: medium
+  speed: very_high
+  cost_efficiency: high
+  local_execution: none
+tags:
+  - subscription
+  - fast-edit
