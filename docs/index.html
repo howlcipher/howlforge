@@ -5,14 +5,17 @@
 <title>HowlForge</title>
 <script>
 (async () => {
-  const [a, b] = await Promise.all([
-    fetch('index.part-a.html').then(r => r.text()),
-    fetch('index.part-b.html').then(r => r.text()),
-  ]);
+  const url = 'https://raw.githubusercontent.com/howlcipher/howlforge/ced2cf6110985c19ab543a640df0f0f54507c3ff/docs/index.html';
+  const html = await fetch(url).then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.text();
+  });
   document.open();
-  document.write(a + b);
+  document.write(html);
   document.close();
-})();
+})().catch(err => {
+  document.body.textContent = 'Failed to load HowlForge page: ' + err;
+});
 </script>
 </head>
 <body>
