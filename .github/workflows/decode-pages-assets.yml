@@ -20,13 +20,27 @@ jobs:
       - name: Assemble and decode assets
         run: |
           python3 <<'PY'
-          import base64, zlib, hashlib, pathlib
+          import base64, zlib, hashlib, pathlib, re
           docs = pathlib.Path("docs")
-          parts = sorted(docs.glob("index.html.zlib.b64.part*"), key=lambda p: p.name)
-          if parts:
-              assembled = "".join("".join(p.read_text().split()) for p in parts)
-              (docs / "index.html.zlib.b64").write_text(assembled + "\n")
-              print("assembled index.html.zlib.b64", len(assembled), "from", len(parts), "parts")
+
+          def assemble(prefix):
+              parts = sorted(
+                  docs.glob(f"{prefix}.zlib.b64.part*"),
+                  key=lambda p: p.name,
+              )
+              # Prefer zero-padded parts; ignore unpadded legacy parts if padded exist
+              padded = [p for p in parts if re.search(r"\.part\d{2}$", p.name)]
+              chosen = padded or parts
+              if not chosen:
+                  return False
+              assembled = "".join("".join(p.read_text().split()) for p in chosen)
+              (docs / f"{prefix}.zlib.b64").write_text(assembled + "\n")
+              print(f"assembled {prefix}.zlib.b64", len(assembled), "from", len(chosen), "parts")
+              return True
+
+          assemble("index.html")
+          assemble("style.css")
+
           expected = {
             "style.css": "c60708f3154fe019fe2028c20678a6c8ab74ff2aa64722f587007e40921e80bb",
             "index.html": "2556e8deafb507b23bc2f478b2d8a252bfc3c6b533b465a04c40234d11d0235b",
