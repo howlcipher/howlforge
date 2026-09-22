@@ -1,8 +1,9 @@
-# Build output
+# Build output. These patterns are anchored to the repository root on purpose:
+# an unanchored "howlforge" would also match the cmd/howlforge source package.
 /build/
 /dist/
-howlforge
-*.exe
+/howlforge
+/howlforge.exe
 
 # Test and coverage artifacts
 coverage.out

@@ -1,0 +1,31 @@
+# EXAMPLE runtime definition. A local model is the only one that can satisfy a
+# privacy or local preference, and it is deliberately weak on the axes that
+# matter for high risk work.
+schema_version: howlforge.runtime/v1
+id: ollama-local
+description: A locally served model reached through Ollama.
+provider: ollama
+model: qwen3-30b-instruct
+runtime: ollama
+economic_class: local
+locality: local
+state:
+  enabled: true
+capabilities:
+  reasoning: medium
+  coding: medium
+  tool_use: low
+  long_horizon: low
+  context_window: medium
+  research: medium
+  planning: medium
+  review: low
+  security: low
+  testing: medium
+  documentation: medium
+  speed: medium
+  cost_efficiency: very_high
+  local_execution: very_high
+tags:
+  - local
+  - offline-capable

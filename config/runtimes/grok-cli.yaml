@@ -1,0 +1,30 @@
+# EXAMPLE runtime definition, shipped disabled to show the difference between
+# a runtime that is not configured and one the operator has not permitted.
+schema_version: howlforge.runtime/v1
+id: grok-cli
+description: Grok reached through its CLI.
+provider: xai
+model: grok
+runtime: grok-cli
+economic_class: metered_api
+locality: remote
+state:
+  enabled: false
+  note: not enabled by this operator; set state.enabled to true to consider it
+capabilities:
+  reasoning: high
+  coding: high
+  tool_use: medium
+  long_horizon: medium
+  context_window: high
+  research: high
+  planning: medium
+  review: medium
+  security: medium
+  testing: medium
+  documentation: medium
+  speed: high
+  cost_efficiency: medium
+  local_execution: none
+tags:
+  - metered

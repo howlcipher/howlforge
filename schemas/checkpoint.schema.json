@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "howlforge.checkpoint/v1",
+  "title": "HowlForge Checkpoint",
+  "description": "The machine readable core of a handoff bundle. Every field exists because its absence would force the replacement worker to guess. The contract this serves: the next worker must be able to continue safely without the previous worker's session transcript.",
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "string", "const": "howlforge.checkpoint/v1" },
+    "task_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Task identity, shared with HowlBoard and HowlPlane."
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The workforce role the departing worker filled."
+    },
+    "runtime": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The client the work was performed through."
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The model that performed the work."
+    },
+    "worker": {
+      "type": "object",
+      "description": "Richer worker identity when it is known.",
+      "properties": {
+        "role": { "type": "string" },
+        "persona": { "type": "string" },
+        "session_id": {
+          "type": "string",
+          "description": "Recorded for audit only. Nothing attempts to reattach to it: sessions are disposable."
+        }
+      },
+      "required": ["role"],
+      "additionalProperties": false
+    },
+    "runtime_identity": {
+      "type": "object",
+      "description": "Richer runtime identity when it is known.",
+      "properties": {
+        "runtime_id": { "type": "string" },
+        "provider": { "type": "string" },
+        "model": { "type": "string" },
+        "runtime": { "type": "string" }
+      },
+      "required": ["model", "runtime"],
+      "additionalProperties": false
+    },
+    "status": {
+      "type": "string",
+      "enum": ["partial", "complete", "blocked", "abandoned"],
+      "description": "How far the departing worker got. An abandoned attempt must not be built on."
+    },
+    "safe_to_resume": {
+      "type": "boolean",
+      "description": "The departing worker's own verdict. It is believed: HowlForge never overrides a worker's caution."
+    },
+    "handoff_reason": {
+      "type": "string",
+      "enum": [
+        "SESSION_LIMIT", "QUOTA_LIMIT", "RATE_LIMIT", "PROVIDER_UNAVAILABLE",
+        "WORKER_FAILURE", "VOLUNTARY", "INTERRUPTED", "COMPLETED"
+      ]
+    },
+    "last_verified_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,64}$",
+      "description": "The commit at which the recorded verification results were observed. Without it the resume rules have nothing to check."
+    },
+    "repository": {
+      "type": "object",
+      "properties": {
+        "root": { "type": "string" },
+        "branch": { "type": "string" },
+        "last_verified_commit": { "type": "string", "pattern": "^[0-9a-f]{7,64}$" },
+        "head_commit": { "type": "string", "pattern": "^[0-9a-f]{7,64}$" },
+        "dirty": {
+          "type": "boolean",
+          "description": "Whether the working tree had uncommitted changes. A dirty tree the checkpoint does not record forces reconciliation."
+        }
+      },
+      "required": ["last_verified_commit"],
+      "additionalProperties": false
+    },
+    "completed": { "type": "array", "items": { "type": "string" } },
+    "remaining": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Outstanding work. A partial checkpoint must list this explicitly."
+    },
+    "changed_files": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Repository relative paths. Absolute paths and parent traversal are refused."
+    },
+    "decisions": {
+      "type": "array",
+      "items": { "$ref": "howlforge.decisions/v1#/$defs/decision" },
+      "description": "Choices the replacement must not silently re-litigate."
+    },
+    "unresolved_questions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Open questions. Their presence forces reconciliation rather than blocking, because an unanswered question is not a failure, it is a reason to look before continuing."
+    },
+    "known_failures": { "type": "array", "items": { "type": "string" } },
+    "verification": { "$ref": "howlforge.verification/v1" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "notes": { "type": "string" }
+  },
+  "required": [
+    "schema_version", "task_id", "role", "runtime", "model",
+    "status", "safe_to_resume", "last_verified_commit", "completed", "remaining"
+  ],
+  "additionalProperties": false
+}

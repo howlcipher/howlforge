@@ -1,0 +1,77 @@
+{
+  "schema_version": "howlforge.checkpoint/v1",
+  "task_id": "HOWL-0042",
+  "role": "implementer",
+  "runtime": "cursor",
+  "model": "composer",
+  "worker": {
+    "role": "implementer",
+    "persona": "",
+    "session_id": "cursor-2026-09-22T13-40-11Z"
+  },
+  "runtime_identity": {
+    "runtime_id": "cursor-composer",
+    "provider": "cursor",
+    "model": "composer",
+    "runtime": "cursor"
+  },
+  "status": "partial",
+  "safe_to_resume": true,
+  "handoff_reason": "SESSION_LIMIT",
+  "last_verified_commit": "5549653fda4342250362e219a2d23813f9022459",
+  "repository": {
+    "root": ".",
+    "branch": "claude/howlforge-initial-build",
+    "last_verified_commit": "5549653fda4342250362e219a2d23813f9022459",
+    "dirty": false
+  },
+  "completed": [
+    "implemented runtime registry",
+    "added unit tests"
+  ],
+  "remaining": [
+    "integration tests",
+    "documentation"
+  ],
+  "changed_files": [
+    "internal/runtimes/runtime.go",
+    "internal/runtimes/runtimes_test.go"
+  ],
+  "decisions": [
+    {
+      "id": "D1",
+      "decision": "Runtime definitions carry no command or argument field",
+      "rationale": "A configuration file must never be able to cause HowlForge to execute a provider. Strict decoding refuses any such field.",
+      "reversible": false
+    },
+    {
+      "id": "D2",
+      "decision": "Runtime capabilities are declared per resource rather than per model",
+      "rationale": "The same model reached through two clients differs in tool use and long horizon behavior, so the client is part of the identity.",
+      "reversible": true
+    }
+  ],
+  "unresolved_questions": [],
+  "known_failures": [],
+  "verification": {
+    "independent": false,
+    "checks": [
+      {
+        "name": "go test ./internal/runtimes/",
+        "command": "go test ./internal/runtimes/",
+        "status": "passed",
+        "result": "ok github.com/howlcipher/howlforge/internal/runtimes",
+        "observed_at": "2026-09-22T13:58:02Z"
+      },
+      {
+        "name": "go vet ./internal/runtimes/",
+        "command": "go vet ./internal/runtimes/",
+        "status": "passed",
+        "result": "no findings",
+        "observed_at": "2026-09-22T13:58:20Z"
+      }
+    ]
+  },
+  "created_at": "2026-09-22T14:01:44Z",
+  "notes": "Session allowance was exhausted mid task. Nothing is half written: the last commit is the last verified state."
+}

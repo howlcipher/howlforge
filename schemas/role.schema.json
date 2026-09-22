@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "howlforge.role/v1",
+  "title": "HowlForge Role",
+  "description": "A durable workforce position. A role declares capability requirements and an ordered preference over runtime selectors; it never names a model as its identity.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "howlforge.role/v1",
+      "description": "Identifies the schema and version this document conforms to."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]{1,64}$",
+      "description": "Stable role identifier."
+    },
+    "description": {
+      "type": "string",
+      "description": "What the role is for. Required unless the role inherits one via extends."
+    },
+    "extends": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]{1,64}$",
+      "description": "Parent role to inherit unset fields from. Cycles are refused."
+    },
+    "responsibilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "What work this role is accountable for."
+    },
+    "required_capabilities": {
+      "type": "object",
+      "additionalProperties": { "$ref": "howlforge.capability_level/v1" },
+      "description": "Capability floors a runtime must meet to be eligible."
+    },
+    "preferred_runtimes": {
+      "type": "array",
+      "items": { "$ref": "howlforge.runtime_ref/v1" },
+      "description": "Ordered first choice runtime selectors."
+    },
+    "fallback_runtimes": {
+      "type": "array",
+      "items": { "$ref": "howlforge.runtime_ref/v1" },
+      "description": "Ordered substitutes, considered after every preferred runtime."
+    },
+    "excluded_runtimes": {
+      "type": "array",
+      "items": { "$ref": "howlforge.runtime_ref/v1" },
+      "description": "Runtimes that must never fill this role, whatever their capabilities."
+    },
+    "handoff_required": {
+      "type": "boolean",
+      "description": "Whether a worker in this role must leave a handoff bundle."
+    },
+    "verification_required": {
+      "type": "boolean",
+      "description": "Whether work by this role must be verified by someone else. The verification block wins when both are present."
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean" },
+        "verifier_role": {
+          "type": "string",
+          "description": "The role that must verify this role's output. It must exist and must not be this role."
+        },
+        "independent_runtime": {
+          "type": "string",
+          "enum": ["required", "preferred", "none"],
+          "description": "Whether the verifying runtime must differ from the producing runtime."
+        }
+      },
+      "required": ["required"],
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "required": ["schema_version", "id"],
+  "additionalProperties": false
+}

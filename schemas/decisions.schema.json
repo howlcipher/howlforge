@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "howlforge.decisions/v1",
+  "title": "HowlForge Handoff Decisions",
+  "description": "Decisions the departing worker made. An irreversible decision does not block resumption, but a replacement that reverses one without noticing causes real damage, so it is surfaced.",
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "string", "const": "howlforge.decisions/v1" },
+    "decisions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/decision" }
+    }
+  },
+  "required": ["schema_version", "decisions"],
+  "additionalProperties": false,
+  "$defs": {
+    "decision": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "description": "Unique within the bundle." },
+        "decision": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string" },
+        "reversible": { "type": "boolean" }
+      },
+      "required": ["id", "decision", "reversible"],
+      "additionalProperties": false
+    }
+  }
+}

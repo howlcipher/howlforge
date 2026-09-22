@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "howlforge.verification/v1",
+  "title": "HowlForge Verification Evidence",
+  "description": "What the departing worker verified. HowlForge reads this evidence and never reproduces it: HowlProof owns verification execution. Independence is recorded truthfully, so a worker that verified its own output says so and HowlProof decides what that is worth.",
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "string", "const": "howlforge.verification/v1" },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "command": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["passed", "failed", "skipped", "errored"],
+            "description": "Anything other than an explicit pass counts as not passed, so a malformed or absent status can never read as success."
+          },
+          "result": { "type": "string" },
+          "observed_at": { "type": "string", "format": "date-time" }
+        },
+        "required": ["name", "status"],
+        "additionalProperties": false
+      }
+    },
+    "independent": {
+      "type": "boolean",
+      "description": "Whether verification was performed by a different worker than the one that produced the change."
+    },
+    "verifier_role": { "type": "string" },
+    "verifier_runtime": { "type": "string" }
+  },
+  "required": ["schema_version", "checks", "independent"],
+  "additionalProperties": false
+}

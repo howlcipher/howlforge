@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "howlforge.runtime_ref/v1",
+  "title": "HowlForge Runtime Selector",
+  "description": "Selects one or more configured runtimes. Every field that is set must match; fields left out are wildcards. At least one field must be set.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "provider": { "type": "string" },
+    "model": { "type": "string" },
+    "runtime": { "type": "string" }
+  },
+  "minProperties": 1,
+  "additionalProperties": false
+}

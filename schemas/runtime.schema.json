@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "howlforge.runtime/v1",
+  "title": "HowlForge Runtime",
+  "description": "A configured execution resource. Runtime definitions are strictly declarative: there is no command, argument or credential field, so a configuration file can never cause HowlForge to execute anything.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "howlforge.runtime/v1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]{1,64}$",
+      "description": "The operator configurable resource identifier."
+    },
+    "description": { "type": "string" },
+    "provider": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "The organization serving the model."
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "The model served."
+    },
+    "runtime": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "The client the model is reached through. The same provider and model reached through two clients are two runtimes."
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": { "$ref": "howlforge.capability_level/v1" },
+      "description": "Declared aptitudes. These are operator expectations, not benchmark results."
+    },
+    "state": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the operator permits this runtime to be considered. Distinct from availability, which is whether it can be used right now."
+        },
+        "note": { "type": "string" }
+      },
+      "required": ["enabled"],
+      "additionalProperties": false
+    },
+    "economic_class": {
+      "type": "string",
+      "enum": ["subscription", "metered_api", "local", "unknown"]
+    },
+    "locality": {
+      "type": "string",
+      "enum": ["remote", "local", "unknown"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "required": ["schema_version", "id", "provider", "model", "runtime", "state"],
+  "additionalProperties": false
+}

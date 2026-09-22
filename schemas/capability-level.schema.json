@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "howlforge.capability_level/v1",
+  "title": "HowlForge Capability Level",
+  "description": "The ordinal capability scale. Comparison is ordinal: an offered level satisfies a required level when it is at least as high.",
+  "type": "string",
+  "enum": ["none", "low", "medium", "high", "very_high"]
+}

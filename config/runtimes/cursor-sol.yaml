@@ -1,0 +1,29 @@
+# EXAMPLE runtime definition. See config/runtimes/README.md.
+schema_version: howlforge.runtime/v1
+id: cursor-sol
+description: GPT-5.6 Sol reached through the Cursor agent.
+provider: openai
+model: gpt-5.6-sol
+runtime: cursor
+economic_class: subscription
+locality: remote
+state:
+  enabled: true
+capabilities:
+  reasoning: very_high
+  coding: very_high
+  tool_use: very_high
+  long_horizon: very_high
+  context_window: high
+  research: high
+  planning: very_high
+  review: high
+  security: high
+  testing: high
+  documentation: high
+  speed: high
+  cost_efficiency: medium
+  local_execution: none
+tags:
+  - subscription
+  - agentic-ide

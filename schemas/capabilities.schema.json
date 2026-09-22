@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "howlforge.capabilities/v1",
+  "title": "HowlForge Capability Vocabulary Extension",
+  "description": "Optional file that admits additional capability names. Extension is additive only: a built-in capability can never be removed, so one repository cannot redefine the shared vocabulary out from under another.",
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "string", "const": "howlforge.capabilities/v1" },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+    }
+  },
+  "required": ["schema_version", "capabilities"],
+  "additionalProperties": false
+}
