@@ -2,6 +2,8 @@
 
 **The AI workforce definition and runtime selection layer for HowlFutureWorks.**
 
+**Documentation site:** https://howlcipher.github.io/howlforge/
+
 > Roles are durable. Models are replaceable. Sessions are disposable.
 
 HowlForge answers four questions and nothing else:
