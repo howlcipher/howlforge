@@ -47,6 +47,7 @@
     <title>HowlForge | AI Workforce Definition &amp; Runtime Selection</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
 </head>
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -227,8 +228,8 @@
                         </p>
                     </div>
 
-                    <div class="axiom-card" role="region" aria-label="Governing Principle" style="border-left-color: var(--color-blue);">
-                        <strong style="color: var(--color-blue);">AXIOM // ROLES ARE DURABLE. MODELS ARE REPLACEABLE. SESSIONS ARE DISPOSABLE.</strong>
+                    <div class="axiom-card axiom-forge" role="region" aria-label="Governing Principle">
+                        <strong>AXIOM // ROLES ARE DURABLE. MODELS ARE REPLACEABLE. SESSIONS ARE DISPOSABLE.</strong>
                         An architect is a role. Claude Opus is a runtime. The two are never equated, because the day the model changes, the role has to survive it.
                     </div>
 
@@ -236,7 +237,7 @@
                         <a href="https://github.com/howlcipher/howlforge" class="btn-tech btn-tech-primary" target="_blank" rel="noreferrer">
                             [ GITHUB ]
                         </a>
-                        <a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/README.md" class="btn-tech" target="_blank" rel="noreferrer">
+                        <a href="https://github.com/howlcipher/howlforge/blob/main/README.md" class="btn-tech" target="_blank" rel="noreferrer">
                             [ DOCUMENTATION ]
                         </a>
                         <a href="https://howlcipher.github.io/howl/" class="btn-tech">
@@ -249,22 +250,22 @@
                             <span>BOUNDARY // SELECT AND EXPLAIN — NEVER LAUNCH</span>
                             <span>GO LIBRARY + CLI</span>
                         </div>
-                        <div class="adversary-grid">
-                            <div class="adversary-card">
-                                <div class="adversary-name">01 // Roles</div>
-                                <p class="adversary-question">What work exists, and what capabilities does it require?</p>
+                        <div class="role-grid">
+                            <div class="role-card">
+                                <div class="role-name">01 // Roles</div>
+                                <p class="role-question">What work exists, and what capabilities does it require?</p>
                             </div>
-                            <div class="adversary-card">
-                                <div class="adversary-name">02 // Runtimes</div>
-                                <p class="adversary-question">Which providers, models, and clients are declared — and available now?</p>
+                            <div class="role-card">
+                                <div class="role-name">02 // Runtimes</div>
+                                <p class="role-question">Which providers, models, and clients are declared — and available now?</p>
                             </div>
-                            <div class="adversary-card">
-                                <div class="adversary-name">03 // Match</div>
-                                <p class="adversary-question">Who is eligible, in what order, and why?</p>
+                            <div class="role-card">
+                                <div class="role-name">03 // Match</div>
+                                <p class="role-question">Who is eligible, in what order, and why?</p>
                             </div>
-                            <div class="adversary-card">
-                                <div class="adversary-name">04 // Handoff</div>
-                                <p class="adversary-question">If a worker disappears, what evidence must exist to resume safely?</p>
+                            <div class="role-card">
+                                <div class="role-name">04 // Handoff</div>
+                                <p class="role-question">If a worker disappears, what evidence must exist to resume safely?</p>
                             </div>
                         </div>
                     </div>
@@ -273,8 +274,8 @@
 
             <section class="tech-panel" id="problem" aria-labelledby="problem-heading">
                 <div class="tech-header">
-                    <span class="sec-id">01</span>
-                    <h2 id="problem-heading">What Forge solves</h2>
+                    <h2 id="problem-heading"><span class="sec-id">SECTION // 01</span> What Forge solves</h2>
+                    <span class="subsystem-tag">HFRG-MOD-PROBLEM</span>
                 </div>
                 <div class="tech-body">
                     <p>
@@ -303,7 +304,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="table-wrap" style="margin-top: 1.25rem;">
+                    <div class="table-wrap">
                         <table>
                             <caption>What HowlForge is not</caption>
                             <thead>
@@ -323,8 +324,8 @@
 
             <section class="tech-panel" id="pack" aria-labelledby="pack-heading">
                 <div class="tech-header">
-                    <span class="sec-id">02</span>
-                    <h2 id="pack-heading">The Pack — shipped example roles</h2>
+                    <h2 id="pack-heading"><span class="sec-id">SECTION // 02</span> The Pack — shipped example roles</h2>
+                    <span class="subsystem-tag">HFRG-MOD-PACK</span>
                 </div>
                 <div class="tech-body">
                     <p>
@@ -357,26 +358,26 @@
 Textual equivalent: product → foreman → {architect, implementer, qa, devops, security,
 researcher, reviewer, sre, auditor} with branching ownership rather than a single line.</code></pre>
                     </div>
-                    <div class="adversary-grid" style="margin-top: 1.25rem;">
-                        <article class="adversary-card"><div class="adversary-name">product</div><p>Defines scope, requirements and acceptance criteria.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">foreman</div><p>Coordinates complex work and delegates to specialists.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">architect</div><p>Designs system structure and evaluates trade-offs.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">implementer</div><p>Writes and modifies code against a defined specification.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">qa</div><p>Exercises behavior to find defects the implementer did not.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">reviewer</div><p>Independently falsifies a change rather than confirming it.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">devops</div><p>Builds and maintains packaging and deployment paths.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">sre</div><p>Protects reliability, diagnoses incidents, reduces recurrence.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">security</div><p>Assesses changes for security defects and unsafe authority use.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">researcher</div><p>Gathers evidence to ground decisions.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">auditor</div><p>Independently audits evidence and authority decisions after the fact.</p></article>
+                    <div class="role-grid spaced">
+                        <article class="role-card"><div class="role-name">product</div><p>Defines scope, requirements and acceptance criteria.</p></article>
+                        <article class="role-card"><div class="role-name">foreman</div><p>Coordinates complex work and delegates to specialists.</p></article>
+                        <article class="role-card"><div class="role-name">architect</div><p>Designs system structure and evaluates trade-offs.</p></article>
+                        <article class="role-card"><div class="role-name">implementer</div><p>Writes and modifies code against a defined specification.</p></article>
+                        <article class="role-card"><div class="role-name">qa</div><p>Exercises behavior to find defects the implementer did not.</p></article>
+                        <article class="role-card"><div class="role-name">reviewer</div><p>Independently falsifies a change rather than confirming it.</p></article>
+                        <article class="role-card"><div class="role-name">devops</div><p>Builds and maintains packaging and deployment paths.</p></article>
+                        <article class="role-card"><div class="role-name">sre</div><p>Protects reliability, diagnoses incidents, reduces recurrence.</p></article>
+                        <article class="role-card"><div class="role-name">security</div><p>Assesses changes for security defects and unsafe authority use.</p></article>
+                        <article class="role-card"><div class="role-name">researcher</div><p>Gathers evidence to ground decisions.</p></article>
+                        <article class="role-card"><div class="role-name">auditor</div><p>Independently audits evidence and authority decisions after the fact.</p></article>
                     </div>
                 </div>
             </section>
 
             <section class="tech-panel" id="flow" aria-labelledby="flow-heading">
                 <div class="tech-header">
-                    <span class="sec-id">03</span>
-                    <h2 id="flow-heading">How it works</h2>
+                    <h2 id="flow-heading"><span class="sec-id">SECTION // 03</span> How it works</h2>
+                    <span class="subsystem-tag">HFRG-MOD-FLOW</span>
                 </div>
                 <div class="tech-body">
                     <p>
@@ -415,23 +416,23 @@ Each candidate records decided_by naming the first term that placed it.</code></
 
             <section class="tech-panel" id="providers" aria-labelledby="providers-heading">
                 <div class="tech-header">
-                    <span class="sec-id">04</span>
-                    <h2 id="providers-heading">Provider independence</h2>
+                    <h2 id="providers-heading"><span class="sec-id">SECTION // 04</span> Provider independence</h2>
+                    <span class="subsystem-tag">HFRG-MOD-PROVIDERS</span>
                 </div>
                 <div class="tech-body">
                     <p>
                         HowlForge organizes capabilities rather than binding the system to one model vendor.
                         Roles prefer <em>selectors</em> (<code>provider</code> + <code>model</code>), not runtime ids, so a new client for the same model becomes a candidate without editing the role.
                     </p>
-                    <div class="adversary-grid">
-                        <article class="adversary-card"><div class="adversary-name">Claude / Claude Code</div><p>Anthropic models via declared runtimes.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">Codex</div><p>OpenAI models through Codex CLI clients.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">Cursor</div><p>Same models through Cursor agent runtimes.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">Grok / Grok Bot</div><p>xAI runtimes as first-class peers.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">AGY / Antigravity</div><p>Gemini-family clients in the example pack.</p></article>
-                        <article class="adversary-card"><div class="adversary-name">Local / Ollama</div><p>Locality-aware runtimes without special-casing the matcher.</p></article>
+                    <div class="role-grid">
+                        <article class="role-card"><div class="role-name">Claude / Claude Code</div><p>Anthropic models via declared runtimes.</p></article>
+                        <article class="role-card"><div class="role-name">Codex</div><p>OpenAI models through Codex CLI clients.</p></article>
+                        <article class="role-card"><div class="role-name">Cursor</div><p>Same models through Cursor agent runtimes.</p></article>
+                        <article class="role-card"><div class="role-name">Grok / Grok Bot</div><p>xAI runtimes as first-class peers.</p></article>
+                        <article class="role-card"><div class="role-name">AGY / Antigravity</div><p>Gemini-family clients in the example pack.</p></article>
+                        <article class="role-card"><div class="role-name">Local / Ollama</div><p>Locality-aware runtimes without special-casing the matcher.</p></article>
                     </div>
-                    <p class="small" style="margin-top: 1rem;">
+                    <p class="small">
                         Capability levels in the example config are <strong>operator expectations, not benchmark results</strong>.
                         Aptitude (HowlForge) and authority (HowlFrame) are separate vocabularies and must never be conflated.
                     </p>
@@ -440,8 +441,8 @@ Each candidate records decided_by naming the first term that placed it.</code></
 
             <section class="tech-panel" id="ecosystem" aria-labelledby="ecosystem-heading">
                 <div class="tech-header">
-                    <span class="sec-id">05</span>
-                    <h2 id="ecosystem-heading">How Forge connects to Howl</h2>
+                    <h2 id="ecosystem-heading"><span class="sec-id">SECTION // 05</span> How Forge connects to Howl</h2>
+                    <span class="subsystem-tag">HFRG-MOD-ECOSYSTEM</span>
                 </div>
                 <div class="tech-body">
                     <p>
@@ -478,7 +479,7 @@ Organization layer: HowlFutureWorks · Work surface: HowlBoard
 Related: HowlWriter · HowlNotes · Howl Hub</code></pre>
                     </div>
                     <p class="small">
-                        Documented integration contracts: <a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/docs/INTEGRATION.md">docs/INTEGRATION.md</a>.
+                        Documented integration contracts: <a href="https://github.com/howlcipher/howlforge/blob/main/docs/INTEGRATION.md">docs/INTEGRATION.md</a>.
                         HowlForge never launches a worker — HowlPlane does.
                     </p>
                 </div>
@@ -486,8 +487,8 @@ Related: HowlWriter · HowlNotes · Howl Hub</code></pre>
 
             <section class="tech-panel" id="philosophy" aria-labelledby="philosophy-heading">
                 <div class="tech-header">
-                    <span class="sec-id">06</span>
-                    <h2 id="philosophy-heading">Philosophy</h2>
+                    <h2 id="philosophy-heading"><span class="sec-id">SECTION // 06</span> Philosophy</h2>
+                    <span class="subsystem-tag">HFRG-MOD-PHILOSOPHY</span>
                 </div>
                 <div class="tech-body">
                     <div class="grid-2col">
@@ -521,8 +522,8 @@ Related: HowlWriter · HowlNotes · Howl Hub</code></pre>
 
             <section class="tech-panel" id="getting-started" aria-labelledby="start-heading">
                 <div class="tech-header">
-                    <span class="sec-id">07</span>
-                    <h2 id="start-heading">Quick start</h2>
+                    <h2 id="start-heading"><span class="sec-id">SECTION // 07</span> Quick start</h2>
+                    <span class="subsystem-tag">HFRG-MOD-START</span>
                 </div>
                 <div class="tech-body">
                     <div class="code-container">
@@ -540,17 +541,17 @@ make build
                     </div>
                     <p class="small">
                         The shipped <code>config/</code> tree is marked as an example throughout and is meant to be replaced.
-                        Further reading: <a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/docs/CLI.md">CLI</a> ·
-                        <a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/docs/HANDOFF.md">Handoff</a> ·
-                        <a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/ARCHITECTURE.md">Architecture</a>.
+                        Further reading: <a href="https://github.com/howlcipher/howlforge/blob/main/docs/CLI.md">CLI</a> ·
+                        <a href="https://github.com/howlcipher/howlforge/blob/main/docs/HANDOFF.md">Handoff</a> ·
+                        <a href="https://github.com/howlcipher/howlforge/blob/main/ARCHITECTURE.md">Architecture</a>.
                     </p>
                 </div>
             </section>
 
             <section class="tech-panel" id="status" aria-labelledby="status-heading">
                 <div class="tech-header">
-                    <span class="sec-id">08</span>
-                    <h2 id="status-heading">Status &amp; repository</h2>
+                    <h2 id="status-heading"><span class="sec-id">SECTION // 08</span> Status &amp; repository</h2>
+                    <span class="subsystem-tag">HFRG-MOD-STATUS</span>
                 </div>
                 <div class="tech-body">
                     <div class="boundary-panel">
@@ -570,10 +571,10 @@ make build
         <footer class="site-footer">
             <div class="footer-telemetry">
                 <div class="status-indicator">
-                    <span class="status-dot" aria-hidden="true" style="background: var(--color-blue); box-shadow: 0 0 6px var(--color-blue);"></span>
+                    <span class="status-dot status-blue" aria-hidden="true"></span>
                     <span>SYS_STATUS: ACTIVE // HOWLFORGE-WORKFORCE-NODE</span>
                 </div>
-                <div><a href="https://github.com/howlcipher/howlforge/blob/claude/howlforge-initial-build/LICENSE" style="color: var(--color-cyan); text-decoration: underline;">MIT LICENSE</a> // HOWL 2026</div>
+                <div>MAINTAINED BY <a href="https://howlcipher.github.io/william_elias/">WILLIAM ELIAS</a> // <a href="https://github.com/howlcipher/howlforge/blob/main/LICENSE">MIT LICENSE</a> // HOWL ECOSYSTEM 2026</div>
             </div>
             <div class="footer-links">
                 <nav class="footer-nav" aria-label="Ecosystem Links">

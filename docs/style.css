@@ -1,9 +1,9 @@
 /* ==========================================================================
    HOWL ECOSYSTEM // SHARED VISUAL SYSTEM
-   Project: HOWL (Unified Ecosystem Portal & Hub)
+   Project: HOWLFORGE (AI Workforce Definition & Runtime Selection)
    Design Language: 2026 Science SARU / Ghost in the Shell Retro-Futurist Industrial
-   Theme: Central Ecosystem Architecture, Navy/Cyan/Blue foundation,
-          Engineered Interoperability Map, warm Shell White surface.
+   Theme: Workforce roles and runtime matching, Blue selection paths,
+          Cyan telemetry, Navy structural headers, warm Shell White surface.
    ========================================================================== */
 
 :root {
@@ -122,7 +122,7 @@ body {
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.65;
-  background-image:
+  background-image: 
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 32px 32px;
@@ -612,7 +612,7 @@ body {
 
 .ecosystem-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.6rem;
 }
 
@@ -635,12 +635,16 @@ body {
   word-break: break-word;
 }
 
+.node-create .enc-header { background: var(--color-amber); }
 .node-frame  .enc-header { background: var(--color-magenta); }
 .node-plane  .enc-header { background: var(--color-blue); }
-.node-notes  .enc-header { background: var(--color-cyan); }
 .node-change .enc-header { background: var(--color-red); }
+.node-relay  .enc-header { background: var(--color-cyan); }
+.node-notes  .enc-header { background: var(--color-cyan); }
 .node-board  .enc-header { background: var(--color-amber); }
 .node-writer .enc-header { background: var(--color-magenta); }
+.node-dream  .enc-header { background: var(--color-khaki); }
+.node-proof  .enc-header { background: var(--color-red); }
 
 .enc-body {
   padding: 0.6rem 0.5rem;
@@ -676,11 +680,11 @@ body {
 
 @media (max-width: 1080px) {
   .ecosystem-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .ecosystem-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -922,17 +926,6 @@ table {
   text-align: left;
 }
 
-table caption {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  text-align: left;
-  padding: 0.5rem 0.85rem;
-  background: var(--bg-surface);
-  border-bottom: 1px solid var(--border-subtle);
-  caption-side: top;
-}
-
 th {
   background: var(--bg-header-band);
   color: var(--text-on-dark);
@@ -1070,9 +1063,9 @@ tr:hover td {
 }
 
 /* ==========================================================================
-   HOWLPROOF // PROJECT-SPECIFIC ACCENT
-   Verdict chips, the adversary grid and the falsification loop, layered on
-   the shared system above. Tokens only — no new colors introduced.
+   HOWLFORGE // PROJECT-SPECIFIC ACCENT
+   Role cards, the engineering loop and the status lists, layered on the shared
+   system above. Tokens only, no new colors introduced. Blue is the Forge accent.
    ========================================================================== */
 
 .small {
@@ -1080,60 +1073,56 @@ tr:hover td {
   color: var(--text-dim);
 }
 
-/* Verdict chips. Order is deliberate: strongest claim first, weakest last. */
-.verdict {
-  display: inline-flex;
-  align-items: center;
+table caption {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  padding: 0.2rem 0.5rem;
-  border: 1px solid currentColor;
-  white-space: nowrap;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 0.5rem 0.85rem;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  caption-side: top;
 }
 
-.verdict-proven      { color: var(--color-cyan); }
-.verdict-conditional { color: var(--color-amber); }
-.verdict-human       { color: var(--color-blue); }
-.verdict-reject      { color: var(--color-red); }
-.verdict-insufficient{ color: var(--color-khaki); }
-
-.verdict-table td:first-child {
-  white-space: nowrap;
-  vertical-align: top;
+.axiom-card.axiom-forge {
+  border-left-color: var(--color-blue);
 }
 
-/* Verdict cards carry the colour of the verdict they describe, so the accent and
-   the chip cannot disagree. */
-.verdict-card.proven       { border-top-color: var(--color-cyan); }
-.verdict-card.conditional  { border-top-color: var(--color-amber); }
-.verdict-card.human        { border-top-color: var(--color-blue); }
-.verdict-card.reject       { border-top-color: var(--color-red); }
-.verdict-card.insufficient { border-top-color: var(--color-khaki); }
+.status-dot.status-blue {
+  background: var(--color-blue);
+  box-shadow: 0 0 6px var(--color-blue);
+}
 
-/* The five adversaries. Each card carries its own accent along the top edge. */
-.adversary-grid {
+.footer-telemetry a {
+  color: var(--color-cyan);
+  text-decoration: underline;
+}
+
+/* Role and boundary cards. Each carries its accent along the top edge. */
+.role-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 0.85rem;
 }
 
-.adversary-card {
+.role-grid.spaced {
+  margin-top: 1.25rem;
+}
+
+.role-card {
   border: 1px solid var(--border-medium);
-  border-top: 3px solid var(--color-red);
+  border-top: 3px solid var(--color-blue);
   background: var(--bg-panel);
   padding: 0.9rem 1rem;
   box-shadow: var(--shadow-flat);
   min-width: 0;
 }
 
-.adversary-card:nth-child(2) { border-top-color: var(--color-magenta); }
-.adversary-card:nth-child(3) { border-top-color: var(--color-amber); }
-.adversary-card:nth-child(4) { border-top-color: var(--color-blue); }
-.adversary-card:nth-child(5) { border-top-color: var(--color-cyan); }
+.role-card:nth-child(4n+2) { border-top-color: var(--color-cyan); }
+.role-card:nth-child(4n+3) { border-top-color: var(--color-amber); }
+.role-card:nth-child(4n+4) { border-top-color: var(--color-magenta); }
 
-.adversary-name {
+.role-name {
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 0.8rem;
@@ -1142,21 +1131,19 @@ tr:hover td {
   color: var(--text-secondary);
 }
 
-.adversary-question {
+.role-question {
   font-size: 0.95rem;
   margin-top: 0.35rem;
   color: var(--text-primary);
 }
 
-.adversary-card ul {
-  margin: 0.6rem 0 0 1.1rem;
-  padding: 0;
-  font-size: 0.85rem;
+.role-card p {
+  margin: 0.35rem 0 0 0;
+  font-size: 0.9rem;
   color: var(--text-muted);
 }
 
-/* The loop. A column at every width, because a horizontal cycle stops being
-   readable long before 375px. */
+/* The loop. Auto-fit columns so a horizontal cycle never forces sideways scroll. */
 .loop {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
@@ -1166,7 +1153,7 @@ tr:hover td {
 
 .loop-step {
   border: 1px solid var(--border-medium);
-  border-left: 3px solid var(--color-red);
+  border-left: 3px solid var(--color-cyan);
   background: var(--bg-surface);
   padding: 0.7rem 0.85rem;
   font-size: 0.9rem;
@@ -1178,16 +1165,17 @@ tr:hover td {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.06em;
-  color: var(--color-red);
+  color: var(--color-cyan);
   margin-bottom: 0.25rem;
 }
 
+/* Steps owned by a sibling. Forge records them but never performs them. */
 .loop-step.elsewhere {
-  border-left-color: var(--color-blue);
+  border-left-color: var(--color-khaki);
   background: var(--bg-sunken);
 }
 
-.loop-step.elsewhere strong { color: var(--color-blue); }
+.loop-step.elsewhere strong { color: var(--color-khaki); }
 
 .loop-return {
   grid-column: 1 / -1;
@@ -1199,7 +1187,7 @@ tr:hover td {
   text-align: center;
 }
 
-/* Check-status legend: four of the six are not passes. */
+/* Without / with lists. Red marks the failure mode, cyan the Forge behaviour. */
 .status-list {
   list-style: none;
   margin: 0;
@@ -1209,24 +1197,22 @@ tr:hover td {
   gap: 0.5rem;
 }
 
+.tech-body .status-list { margin: 0.5rem 0 1.25rem 0; }
+
 .status-list li {
   border-left: 3px solid var(--border-medium);
   padding: 0.4rem 0.7rem;
   font-size: 0.9rem;
   background: var(--bg-surface);
+  margin-bottom: 0;
 }
 
-.status-list li.pass    { border-left-color: var(--color-cyan); }
-.status-list li.fail    { border-left-color: var(--color-red); }
-.status-list li.unknown { border-left-color: var(--color-khaki); }
+.status-list li.pass { border-left-color: var(--color-cyan); }
+.status-list li.fail { border-left-color: var(--color-red); }
 
-.status-list code {
-  font-weight: 700;
-}
-
-/* The independence statement. The one claim the whole component rests on. */
+/* The scope statement. The one claim the whole component rests on. */
 .boundary-panel {
-  border: 2px solid var(--color-red);
+  border: 2px solid var(--color-blue);
   background: var(--bg-panel);
   padding: 1.25rem;
   box-shadow: var(--shadow-panel);

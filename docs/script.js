@@ -1,5 +1,5 @@
 /**
- * Howl Ecosystem Shared Client Script - HowlDream
+ * Howl Ecosystem Shared Client Script - HowlForge
  */
 
 document.addEventListener('DOMContentLoaded', () => {

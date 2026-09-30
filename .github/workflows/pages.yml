@@ -1,7 +1,7 @@
 name: Pages
 on:
   push:
-    branches: [main, "claude/howlforge-initial-build", "cursor/**"]
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
