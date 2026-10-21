@@ -10,7 +10,7 @@ same word for different things, discovered during an incident.
 ## Availability states
 
 HowlForge's `howlforge.availability/v1` and HowlPlane's
-`ProviderAvailabilityStatus` (`src/control_plane/synthesis/provider_pool.py`).
+`ProviderAvailabilityStatus` (`src/howlplane/control_plane/synthesis/provider_pool.py`).
 
 | HowlForge | HowlPlane | Notes |
 | --- | --- | --- |

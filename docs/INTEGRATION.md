@@ -4,6 +4,15 @@ How the rest of HowlFutureWorks talks to HowlForge, and where each boundary sits
 
 ## HowlPlane
 
+**Status: proposed, not implemented.** HowlPlane does not call HowlForge yet,
+and no component writes the availability state file HowlForge reads (the path
+below is an example). Whether HowlPlane should write it, and whether its
+provider pool should adopt HowlForge's definitions, is an owner decision.
+HowlPlane's engine is Python, so the practical surface is the CLI with `--json`
+(`howlforge match`, `howlforge explain`) under the
+[Howl interop contract](https://github.com/howlcipher/howl/blob/main/docs/INTEROP.md),
+rather than the Go package shown here.
+
 ### The conversation
 
 ```
@@ -97,7 +106,7 @@ howlforge match implementer --require coding=high --json
 
 ### The honest overlap
 
-HowlPlane's `src/control_plane/synthesis/provider_pool.py` already implements a
+HowlPlane's `src/howlplane/control_plane/synthesis/provider_pool.py` already implements a
 nine stage eligibility filter with durable capacity state and deterministic
 ranking. HowlForge is meant to be the definition layer that pool adopts, not a
 second selector running beside it.

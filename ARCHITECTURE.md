@@ -276,13 +276,16 @@ observation. Re-running it is HowlProof's job.
 HowlPlane orchestrates. HowlForge selects. The boundary is that **HowlForge
 never launches anything** and holds no scheduling, retry or routing state.
 
-HowlForge does not import HowlPlane and never will. HowlPlane imports
-`pkg/howlforge`, whose entire public surface is `Matcher`, `Explainer` and
-`Validator`, none of which can cause execution. The conversation is in
+HowlForge does not import HowlPlane and never will. The intended consumer is
+HowlPlane, through `pkg/howlforge` (whose entire public surface is `Matcher`,
+`Explainer` and `Validator`, none of which can cause execution) or, since
+HowlPlane's engine is Python, through `howlforge match|explain --json`.
+**Neither is wired today:** HowlPlane does not call HowlForge, and nothing
+writes the availability file HowlForge reads. The proposed conversation is in
 `docs/INTEGRATION.md`.
 
 There is a real overlap to be honest about: HowlPlane's
-`src/control_plane/synthesis/provider_pool.py` already implements a nine stage
+`src/howlplane/control_plane/synthesis/provider_pool.py` already implements a nine stage
 filter with durable capacity state and deterministic ranking. HowlForge is
 intended to be the *definition* layer that pool adopts, not a second selector
 running beside it. `docs/SCHEMA_MAPPING.md` states the vocabulary mapping so
