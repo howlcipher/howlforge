@@ -4,10 +4,22 @@ How the rest of HowlFutureWorks talks to HowlForge, and where each boundary sits
 
 ## HowlPlane
 
-**Status: proposed, not implemented.** HowlPlane does not call HowlForge yet,
+**Status: deferred (decided 2026-10-21).** HowlPlane does not call HowlForge,
 and no component writes the availability state file HowlForge reads (the path
-below is an example). Whether HowlPlane should write it, and whether its
-provider pool should adopt HowlForge's definitions, is an owner decision.
+below is an example). HowlPlane's provider pool already selects workers with
+its own durable capacity state, and nothing in HowlPlane needs a role
+definition it lacks, so wiring HowlForge in now would add a second selector
+without removing the first. Revisit when either holds:
+
+- HowlPlane needs a role HowlForge defines and its pool does not (for example a
+  reviewer that must run on a different runtime from the implementer), or
+- HowlFutureWorks staffs positions from HowlForge matches (the ids already line
+  up through `metadata.hfw_role` / `metadata.hfw_executor`, see
+  [`SCHEMA_MAPPING.md`](SCHEMA_MAPPING.md)).
+
+At that point HowlPlane writes the availability file and calls
+`howlforge match --json` under the Howl interop contract; it never imports the
+Go package.
 HowlPlane's engine is Python, so the practical surface is the CLI with `--json`
 (`howlforge match`, `howlforge explain`) under the
 [Howl interop contract](https://github.com/howlcipher/howl/blob/main/docs/INTEROP.md),
