@@ -22,3 +22,6 @@ fallback_runtimes:
     model: gemini-flash
 handoff_required: true
 verification_required: false
+metadata:
+  # The HowlFutureWorks role this role fills (roles/sre.md there).
+  hfw_role: sre

@@ -27,3 +27,6 @@ capabilities:
 tags:
   - subscription
   - high-throughput
+metadata:
+  # The HowlFutureWorks executor id (routing/capability-registry.yaml there).
+  hfw_executor: agy

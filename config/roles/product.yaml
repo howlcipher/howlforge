@@ -22,3 +22,6 @@ fallback_runtimes:
     model: gpt-5.6-sol
 handoff_required: true
 verification_required: false
+metadata:
+  # The HowlFutureWorks role this role fills (roles/product.md there).
+  hfw_role: product

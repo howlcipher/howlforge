@@ -29,3 +29,6 @@ capabilities:
 tags:
   - subscription
   - agentic-cli
+metadata:
+  # The HowlFutureWorks executor id (routing/capability-registry.yaml there).
+  hfw_executor: claude
