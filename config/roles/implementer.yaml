@@ -28,3 +28,6 @@ verification:
   # An implementer must never be the final verifier of its own work.
   verifier_role: reviewer
   independent_runtime: required
+metadata:
+  # The HowlFutureWorks role this role fills (roles/developer.md there).
+  hfw_role: developer

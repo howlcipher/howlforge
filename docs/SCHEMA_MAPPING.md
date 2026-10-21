@@ -103,6 +103,43 @@ The reviewer roles map to specializations of HowlForge's `reviewer` and
 expressed as roles that `extends: reviewer` with different
 `required_capabilities`, which is what the `extends` mechanism is for.
 
+## HowlFutureWorks identifiers
+
+HowlFutureWorks owns the organization: its `roles/*.md` and the executors in
+`routing/capability-registry.yaml` are the identifiers people and policy use.
+HowlForge keeps its own role and runtime ids for matching and records the
+HowlFutureWorks id each one corresponds to in `metadata`, so the two can be
+joined without either renaming anything. `TestHowlFutureWorksIdentifiers`
+checks every value against the HowlFutureWorks ids at a pinned commit.
+
+| HowlForge role | `metadata.hfw_role` |
+| --- | --- |
+| `architect` | `software-architect` |
+| `auditor` | `auditor` |
+| `devops` | `devops` |
+| `foreman` | `dev-lead` |
+| `implementer` | `developer` |
+| `product` | `product` |
+| `qa` | `qa` |
+| `researcher` | `rnd` |
+| `reviewer` | `qa` |
+| `security` | `security` |
+| `sre` | `sre` |
+
+HowlFutureWorks roles with no HowlForge role yet: `owner` (a person, never a
+worker), `engineering-manager`, `release-manager`, `support`, `writer`. Two
+HowlForge roles share `qa`: `qa` exercises behaviour, `reviewer` falsifies a
+change; both are HowlFutureWorks' independent verification.
+
+| HowlForge runtime | `metadata.hfw_executor` |
+| --- | --- |
+| `claude-code-opus` | `claude` |
+| `codex-cli-sol` | `codex` |
+| `agy-gemini-flash` | `agy` |
+
+The other runtimes (Cursor, Gemini CLI, Grok CLI, Ollama) have no
+HowlFutureWorks executor; HowlFutureWorks' `astra` has no HowlForge runtime.
+
 ## Handoff contracts
 
 HowlForge's `howlforge.checkpoint/v1` and HowlPlane's `ai.handoff/v1`

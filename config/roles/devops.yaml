@@ -26,3 +26,6 @@ verification:
   required: true
   verifier_role: reviewer
   independent_runtime: preferred
+metadata:
+  # The HowlFutureWorks role this role fills (roles/devops.md there).
+  hfw_role: devops

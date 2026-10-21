@@ -22,3 +22,6 @@ fallback_runtimes:
     model: gemini-pro
 handoff_required: true
 verification_required: false
+metadata:
+  # The HowlFutureWorks role this role fills (roles/qa.md there).
+  hfw_role: qa

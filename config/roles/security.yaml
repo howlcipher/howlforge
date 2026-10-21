@@ -27,3 +27,6 @@ verification:
   required: true
   verifier_role: auditor
   independent_runtime: required
+metadata:
+  # The HowlFutureWorks role this role fills (roles/security.md there).
+  hfw_role: security

@@ -23,3 +23,6 @@ excluded_runtimes:
   - id: ollama-local
 handoff_required: true
 verification_required: false
+metadata:
+  # The HowlFutureWorks role this role fills (roles/auditor.md there).
+  hfw_role: auditor
