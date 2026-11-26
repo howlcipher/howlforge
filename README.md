@@ -333,3 +333,10 @@ Requires Go 1.24 or newer and nothing else.
 ## License
 
 MIT. See [`LICENSE`](LICENSE).
+
+
+When a checkpoint includes an embedded verification object, set its
+`schema_version` to `howlforge.verification/v1`. Older bundles missing this
+field can be migrated by identifying the embedded object as v1 after confirming
+its contents match the v1 schema. The separate `verification.json` still
+requires its own schema identifier.
