@@ -212,6 +212,10 @@ func (b *Bundle) validateCheckpoint(c *Checkpoint) {
 		b.errorf(FileCheckpoint, "remaining",
 			"a partial checkpoint must list remaining work explicitly")
 	}
+	if c.Verification != nil && c.Verification.SchemaVersion != VerificationSchemaVersion {
+		b.errorf(FileCheckpoint, "verification.schema_version",
+			"must be %q, got %q", VerificationSchemaVersion, c.Verification.SchemaVersion)
+	}
 	if c.SafeToResume && c.Status == StatusAbandoned {
 		b.errorf(FileCheckpoint, "safe_to_resume",
 			"an abandoned checkpoint must not be marked safe to resume")

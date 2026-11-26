@@ -54,6 +54,7 @@
   "unresolved_questions": [],
   "known_failures": [],
   "verification": {
+    "schema_version": "howlforge.verification/v1",
     "independent": false,
     "checks": [
       {

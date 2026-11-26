@@ -343,3 +343,34 @@ func TestCheckPassedIsStrict(t *testing.T) {
 		t.Error("case and whitespace should be normalized")
 	}
 }
+
+func TestEmbeddedVerificationRequiresItsSchemaVersion(t *testing.T) {
+	for _, version := range []string{"", "howlforge.verification/v2", VerificationSchemaVersion} {
+		t.Run("version="+version, func(t *testing.T) {
+			files := bundleFiles()
+			evidence := files[FileVerification]
+			if version == "" {
+				evidence = strings.Replace(evidence, `"schema_version": "howlforge.verification/v1",`, "", 1)
+			} else {
+				evidence = strings.Replace(evidence, VerificationSchemaVersion, version, 1)
+			}
+			checkpoint := strings.TrimSuffix(files[FileCheckpoint], "}") + `,"verification":` + evidence + "}"
+			bundle, err := Load(writeBundle(t, map[string]*string{FileCheckpoint: &checkpoint}))
+			if err != nil {
+				t.Fatal(err)
+			}
+			if version == VerificationSchemaVersion {
+				if !bundle.Valid() {
+					t.Fatalf("valid embedded verification rejected: %v", bundle.Diagnostics)
+				}
+				return
+			}
+			for _, diagnostic := range bundle.Errors() {
+				if diagnostic.File == FileCheckpoint && diagnostic.Field == "verification.schema_version" {
+					return
+				}
+			}
+			t.Fatalf("expected embedded verification version error, got %v", bundle.Diagnostics)
+		})
+	}
+}
